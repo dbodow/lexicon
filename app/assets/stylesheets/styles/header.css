@@ -1,0 +1,84 @@
+/* TODO: refactor the max width to a global fixed-width style */
+
+.header-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(51, 54, 59, 0.95);
+  z-index: 1;
+}
+
+.header-content {
+  font-family: 'Asap', sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+.fixed-width {
+  margin: 0 auto;
+  width: 95%;
+  max-width: 1025px;
+}
+
+.header-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 97.5%;
+  max-width: 650px;
+}
+
+.nav-link {
+  font-size: 15px;
+}
+
+.nav-link i {
+  margin-right: 10px;
+}
+
+.nav-link:link, .nav-link:visited {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-link:hover {
+  color: rgb(255, 255, 255);
+}
+
+.active i {
+  color: rgb(77, 181, 56);
+}
+
+.logged-out-greeting {
+  display: flex;
+  align-items: center;
+}
+
+.signup-link, .session-link {
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.signup-link:link, .session-link:link, .logo-text:link,
+.signup-link:visited, .session-link:visited, .logo-text:visited {
+  color: white;
+}
+
+.session-link {
+  margin-right: 10px;
+  background-color: rgba(255, 255, 255, 0.2)
+}
+
+.signup-link {
+  background-color: rgb(77, 181, 56);
+}
+
+.logo-text {
+  font-size: 24px;
+  margin: auto 0;
+  font-family: 'Asap', sans-serif;
+  font-weight: 700;
+}
