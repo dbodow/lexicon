@@ -26,3 +26,6 @@ npm-debug.log
 
 # in case of development from a mac
 .DS_Store
+
+# Ignore encrypted secrets key file.
+config/secrets.yml.key

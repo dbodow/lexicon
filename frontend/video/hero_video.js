@@ -49,13 +49,15 @@ function scaleBannerVideoSize(element){
 
         $(this).width(windowWidth);
 
-        if(windowWidth < 1000){
-            videoHeight = windowHeight;
-            videoWidth = videoHeight / videoAspectRatio;
-            $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
-
-            $(this).width(videoWidth).height(videoHeight);
-        }
+        // Bonus feature: rewrite for responsive design
+        // currently does not scale back up.
+        // if(windowWidth < 1000){
+        //     videoHeight = windowHeight;
+        //     videoWidth = videoHeight / videoAspectRatio;
+        //     $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
+        //
+        //     $(this).width(videoWidth).height(videoHeight);
+        // }
 
         $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
 

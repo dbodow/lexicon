@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Added encrypted secrets to protect wordnik api key
+  config.read_encrypted_secrets = true
 end
