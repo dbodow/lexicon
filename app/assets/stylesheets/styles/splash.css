@@ -1,0 +1,113 @@
+.homepage-hero-module {
+  border-right: none;
+  border-left: none;
+  position: relative;
+  max-height: 550px;
+  overflow: hidden;
+}
+
+.no-video .video-container video,
+.touch .video-container video {
+  display: none;
+}
+
+.no-video .video-container .poster,
+.touch .video-container .poster {
+  display: block !important;
+}
+
+.video-container {
+  position: relative;
+  bottom: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  max-height: 550px;
+}
+
+.video-container .poster img {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  max-height: 550px;
+  overflow: hidden;
+}
+
+.video-container .filter {
+  z-index: 100;
+  position: absolute;
+  background: rgba(37, 54, 40, 0.7);
+  width: 100%;
+  height: 100%;
+  min-height: 550px;
+}
+
+.video-container video {
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+}
+
+.video-container video.fillWidth {
+  width: 100%;
+}
+
+.splash-hero {
+  color: white;
+  font-family: 'Asap', sans-serif;
+}
+
+.splash-hero-pitch {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 250px;
+  padding: 20px 60px 20px 20px;
+}
+
+.splash-hero-pitch h1 {
+  font-weight: 700;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.splash-hero-pitch h2 {
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.splash-hero-pitch p {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.splash-hero-def {
+  border: 2px solid white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 160px;
+  padding: 15px;
+}
+
+.splash-hero-def h1 {
+  font-size: 32px;
+  font-style: italic;
+  margin-left: 15px;
+}
+
+.splash-hero-def p {
+  font-style: italic;
+  font-size: 12px;
+  margin-left: 15px;
+}
+
+.splash-hero-def ol {
+  list-style-type: lower-roman;
+  font-size: 14px;
+  line-height: 1.75;
+  margin-left: 15px;
+}

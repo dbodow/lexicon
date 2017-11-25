@@ -38,9 +38,9 @@ class SessionForm extends React.Component {
 
   displaySwitchFormType() {
     if (this.props.formType === 'login') {
-      return <Link to="/signup">{"Create a new Lexicon account."}</Link>;
+      return <Link to="/signup" className="switch-form-link">{"New user? Create a new Lexicon account."}</Link>;
     } else {
-      return <Link to="/login">{"Already a Lexicon user? Log in."}</Link>;
+      return <Link to="/login" className="switch-form-link">{"Already a Lexicon user? Log in."}</Link>;
     }
   }
 
@@ -60,22 +60,25 @@ class SessionForm extends React.Component {
     const text = (this.props.formType === 'login') ? 'Log In' : 'Sign Up';
     return (
       <div className="session-form-container">
-        <form onSubmit={this.handleSubmit} className="session-form">
+        <form onSubmit={this.handleSubmit}
+              className="session-form fixed-width">
           <h2>{text}</h2>
-          {this.displayErrors()}
-          <label>
-            Username:
+          <div className="session-form-errors">
+            {this.displayErrors()}
+          </div>
+          <div className="session-form-inputs">
             <input type='text'
                    onChange={this.handleChange('username')}
-                   className='session-form-input' />
-          </label>
-          <label>
-            Password:
+                   className='session-form-input'
+                   placeholder="Enter username" />
             <input type='password'
                    onChange={this.handleChange('password')}
-                   className='session-form-input' />
-          </label>
-          <input type='submit' value='submit' />
+                   className='session-form-input'
+                   placeholder="Enter password" />
+            <input type='submit'
+                   value='Submit'
+                   className='session-form-button'/>
+          </div>
           {this.displaySwitchFormType()}
         </form>
       </div>

@@ -1,0 +1,38 @@
+.header-spacer {
+  height: 80px;
+}
+
+.fixed-width {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 95%;
+  max-width: 1025px;
+}
+
+.inner-fixed-width {
+  display: flex;
+  box-sizing: border-box;
+  width: 97.5%;
+  max-width: 650px;
+}
+
+.flex-article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.col-1-3 {
+  flex-grow: 1;
+}
+
+.col-2-3 {
+  flex-grow: 2;
+}
+
+.article-sign-up {
+  font-size: 20px;
+  display: inline-flex;
+  align-self: flex-end;
+}

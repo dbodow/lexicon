@@ -1,0 +1,60 @@
+/* Referenced stecthing content solution from
+https://stackoverflow.com/questions/28980638/sticky-footer-and-content-with-100-height
+*/
+
+.session-form-container {
+  background-image: linear-gradient(-62deg,
+                                    rgb(113, 150, 105) 0px,
+                                    rgb(78, 140, 65) 50%,
+                                    rgb(88, 144, 76) 50%,
+                                    rgb(62, 131, 49) 100% );
+  min-height: calc(100vh - 160px);
+  overflow: hidden;
+}
+
+.session-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 60px auto;
+  width: 420px;
+  height: 400px;
+  padding: 20px 30px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 0;
+  border-radius: 3px;
+  font-family: 'Asap', sans-serif;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+.session-form h2 {
+  color: rgb(65, 69, 64);
+  font-weight: 700;
+  font-size: 30px;
+  margin: 5px auto;
+}
+
+.session-form input {
+  box-sizing: border-box;
+  padding: 9px;
+  margin: 6px auto;
+  border: 1px solid rgb(204,204,204);
+  width: 100%;
+}
+
+.session-form input:focus {
+  border: 1px solid #4285f4;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.session-form-button {
+  padding: 15px 15px;
+  background-color: rgb(77, 181, 56);
+  color: white;
+  font-size: 20px;
+}
+
+.switch-form-link:visited, .switch-form-link:link {
+  color: #508c44;
+}
