@@ -19,7 +19,7 @@ https://stackoverflow.com/questions/28980638/sticky-footer-and-content-with-100-
   justify-content: space-around;
   margin: 60px auto;
   width: 420px;
-  height: 400px;
+  height: 450px;
   padding: 20px 30px;
   background-color: rgba(255, 255, 255, 0.9);
   border: 0;
@@ -57,4 +57,12 @@ https://stackoverflow.com/questions/28980638/sticky-footer-and-content-with-100-
 
 .switch-form-link:visited, .switch-form-link:link {
   color: #508c44;
+}
+
+.demo-user-button {
+  background-color: rgb(66, 133, 244);
+  border: none;
+  padding: 10px;
+  color: white;
+  font-size: 16px;
 }

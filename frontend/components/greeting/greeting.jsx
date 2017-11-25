@@ -10,13 +10,13 @@ const loggedOutGreeting = () => (
 
 const renderIcon = user => {
   if (user.points === 0) {
-    return <i class="fa fa-child fa-2x" aria-hidden="true"></i>;
+    return <i className="fa fa-child fa-2x" aria-hidden="true"></i>;
   } else if (user.points < 1000) {
-    return <i class="fa fa-leaf fa-2x" aria-hidden="true"></i>;
+    return <i className="fa fa-leaf fa-2x" aria-hidden="true"></i>;
   } else if (user.points < 2000) {
-    return <i class="fa fa-fire fa-2x" aria-hidden="true"></i>;
+    return <i className="fa fa-fire fa-2x" aria-hidden="true"></i>;
   } else {
-    return <i class="fa fa-bolt fa-2x" aria-hidden="true"></i>;
+    return <i className="fa fa-bolt fa-2x" aria-hidden="true"></i>;
   }
 };
 

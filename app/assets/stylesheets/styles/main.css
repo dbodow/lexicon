@@ -13,13 +13,11 @@
   display: flex;
   box-sizing: border-box;
   width: 97.5%;
-  max-width: 650px;
+  max-width: 550px;
 }
 
 .flex-article {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   height: 100%;
 }
 

@@ -18,7 +18,7 @@
 .logo-container {
   display: flex;
   justify-content: center;
-  width: 150px;
+  width: 220px;
 }
 
 .logo-text {
@@ -57,7 +57,8 @@
 .logged-out-greeting {
   display: flex;
   align-items: center;
-  width: 150px;
+  justify-content: center;
+  width: 220px;
 }
 
 .signup-link, .session-link, .logout-button {
@@ -86,9 +87,9 @@
 
 .logged-in-greeting {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 160px;
+  width: 220px;
 }
 
 .user-data {
@@ -106,6 +107,7 @@
 
 .logged-in-greeting i {
   color: rgb(77, 181, 56);
+  margin: 0 15px;
 }
 
 .logout-button {

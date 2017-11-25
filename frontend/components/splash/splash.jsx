@@ -9,7 +9,20 @@ export default class Splash extends React.Component {
 
   renderHero() {
     return (
-      <div className="fixed-width flex-article">
+      <section className="homepage-hero-module">
+        <div className="video-container">
+          <div className="splash-hero filter">
+            {this.renderHeroArticle()}
+          </div>
+          {this.renderVideo()}
+        </div>
+      </section>
+    );
+  }
+
+  renderHeroArticle() {
+    return (
+      <div className="fixed-width flex-article splash-hero-container">
         <article className="splash-hero-pitch col-2-3">
           <h1>Welcome to Lexicon.</h1>
           <h2>Isn't it time to expand your lexicon?</h2>
@@ -42,15 +55,46 @@ export default class Splash extends React.Component {
     );
   }
 
-  render() {
-  return (
-    <div className="homepage-hero-module">
-      <div className="video-container">
-        <div className="splash-hero filter">
-          {this.renderHero()}
+  renderAbout() {
+    return (
+      <section className="homepage-about-module">
+        <h1>From word lookup to quizzing and study, Lexicon helps you master new vocabulary.</h1>
+        <div className="fixed-width flex-article splash-about-container">
+          <div className="about-lookups sequence-box col-1-3">
+            <div className="sequence-box-headers">
+              <h2>1.</h2>
+              <h3>Search for new words.</h3>
+            </div>
+            <i className="fa fa-book fa-4x" aria-hidden="true"></i>
+            <p>Lexicon checks multiple dictionaries to give you an in-depth search that finds even the hardest words.</p>
+          </div>
+          <div className="about-lists sequence-box col-1-3">
+            <div className="sequence-box-headers">
+              <h2>2.</h2>
+              <h3>Make lists you want to study.</h3>
+            </div>
+            <i className="fa fa-list fa-4x" aria-hidden="true"></i>
+            <p>Group new words into lists to learn about new topics, understand difficult books, or prepare for an exam.</p>
+          </div>
+          <div className="about-quizzes sequence-box col-1-3">
+            <div className="sequence-box-headers">
+              <h2>3.</h2>
+              <h3>Quiz yourself to master words.</h3>
+            </div>
+            <i className="fa fa-line-chart fa-4x" aria-hidden="true"></i>
+            <p>Lexicon tracks your mastery of each word, quizzing you until you remember it perfectly!</p>
+          </div>
         </div>
-        {this.renderVideo()}
+      </section>
+    );
+  }
+
+  render() {
+    return (
+      <div className="splash-content">
+        {this.renderHero()}
+        {this.renderAbout()}
       </div>
-    </div>
-  );}
+    );
+  }
 }

@@ -11,6 +11,7 @@ class SessionForm extends React.Component {
       password: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.loginDemoUser = this.loginDemoUser.bind(this);
   }
 
   componentWillMount() {
@@ -56,6 +57,14 @@ class SessionForm extends React.Component {
     );
   }
 
+  loginDemoUser(e) {
+    e.preventDefault();
+    this.props.login({
+      username: "eHemmingway",
+      password: "fivetoedcat"
+    });
+  }
+
   render() {
     const text = (this.props.formType === 'login') ? 'Log In' : 'Sign Up';
     return (
@@ -80,6 +89,13 @@ class SessionForm extends React.Component {
                    className='session-form-button'/>
           </div>
           {this.displaySwitchFormType()}
+          <span>
+            ...or enter as a &nbsp;
+            <button className="demo-user-button"
+                    onClick={this.loginDemoUser}>
+                    Demo User
+            </button>
+          </span>
         </form>
       </div>
     );
