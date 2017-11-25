@@ -36,5 +36,12 @@
   "bugs": {
     "url": "https://github.com/dbodow/lexicon/issues"
   },
-  "homepage": "https://github.com/dbodow/lexicon#readme"
+  "homepage": "https://github.com/dbodow/lexicon#readme",
+  "engines": {
+    "node": "6.10.1",
+    "npm": "3.10.10"
+  },
+  "scripts": {
+    "postinstall": "webpack"
+  }
 }
