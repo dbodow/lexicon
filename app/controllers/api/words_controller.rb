@@ -3,13 +3,17 @@ class Api::WordsController < ApplicationController
     @query_results = Word.query_wordnik(params[:query])
     unless @query_results['totalResults'] > 0
       render json: ["No results for #{params[:query]}."], status: 404
+      return
     end
     render :index
   end
 
   def show
     @word = Word.find_by(word: params[:word]) || create_word(params[:word])
-    render json: ['Word not found.'], status: 404 unless @word
+    unless @word
+      render json: ['Word not found.'], status: 404
+      return
+    end
     render :show
   end
 

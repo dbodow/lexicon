@@ -1,4 +1,4 @@
-import { RECEIVE_CURRENT_USER } from '../actions/session_actions.js';
+import { RECEIVE_WORD_DATA } from '../actions/word_actions.js';
 import { RECEIVE_ERRORS,
         CLEAR_ERRORS } from '../actions/error_actions';
 
@@ -9,7 +9,7 @@ export default (state = _nullErrors, action) => {
   switch(action.type) {
     case RECEIVE_ERRORS:
       return action.errors;
-    case RECEIVE_CURRENT_USER:
+    case RECEIVE_WORD_DATA:
       return _nullErrors;
     case CLEAR_ERRORS:
       return [];

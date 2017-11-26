@@ -35,6 +35,10 @@ https://stackoverflow.com/questions/28980638/sticky-footer-and-content-with-100-
   margin: 5px auto;
 }
 
+.session-form-errors {
+  line-height: 1.75
+}
+
 .session-form input {
   box-sizing: border-box;
   padding: 9px;

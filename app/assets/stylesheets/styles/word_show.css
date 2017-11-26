@@ -1,0 +1,60 @@
+.word-show-container {
+  font-family: 'Asap', sans-serif;
+  min-height: calc(100vh - 160px);
+}
+
+.word-show-header {
+  border-bottom: 1px solid rgb(238, 238, 238);
+  padding: 12px 0;
+}
+
+.word-show-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(51, 51, 51);
+}
+
+.word-show-header h2 {
+  font-size: 18px;
+  color: rgb(51, 51, 51);
+}
+
+.word-show-header a {
+  font-size: 14px;
+}
+
+.word-hero {
+  font-size: 120px;
+  margin-top: 80px;
+  margin-bottom: 40px;
+}
+
+.word-show-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.word-definitions-container {
+  width: 510px;
+  border-top: 1px solid rgb(238, 238, 238);
+}
+
+.word-examples-container {
+  width: 460px;
+  border-top: 1px solid rgb(238, 238, 238);
+}
+
+.word-definitions-container h2,
+.word-examples-container h2 {
+  color: rgb(68, 68, 68);
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.word-definitions-container strong {
+  color: rgb(67, 128, 7);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.75;
+}
