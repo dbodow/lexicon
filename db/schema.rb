@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171123174806) do
+ActiveRecord::Schema.define(version: 20171125230543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "definitions", force: :cascade do |t|
+    t.string "definition", null: false
+    t.string "pos", null: false
+    t.string "attribution"
+    t.integer "word_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["definition"], name: "index_definitions_on_definition", unique: true
+    t.index ["word_id"], name: "index_definitions_on_word_id"
+  end
+
+  create_table "examples", force: :cascade do |t|
+    t.string "example", null: false
+    t.string "example_source"
+    t.integer "word_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["example"], name: "index_examples_on_example", unique: true
+    t.index ["word_id"], name: "index_examples_on_word_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
@@ -23,6 +44,13 @@ ActiveRecord::Schema.define(version: 20171123174806) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "word", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["word"], name: "index_words_on_word", unique: true
   end
 
 end

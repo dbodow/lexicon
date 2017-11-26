@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  example: MyString
+  example_source: MyString
+  word_id: 1
+
+two:
+  example: MyString
+  example_source: MyString
+  word_id: 1

@@ -31,6 +31,7 @@ gem 'jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'font-awesome-sass', '~> 4.7.0'
+gem 'httparty'
 
 group :development, :test do
   gem 'annotate'
