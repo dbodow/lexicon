@@ -5,7 +5,7 @@ class Api::WordsController < ApplicationController
       render json: ["No results for #{params[:query]}."], status: 404
       return
     end
-    render :index
+    render json: parseQueryResults
   end
 
   def show
@@ -49,5 +49,13 @@ class Api::WordsController < ApplicationController
       Example.create(example: example, example_source: example_source,
                      word_id: word_id)
     end
+  end
+
+  def parseQueryResults
+    parsed_results = []
+    @query_results['searchResults'].each do |result|
+      parsed_results << result['word'] unless result['count'] == 0
+    end
+    parsed_results
   end
 end

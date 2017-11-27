@@ -12,7 +12,7 @@ export default class WordShowHeader extends React.Component {
       <div className="word-show-header">
         <div className="word-show-header-content fixed-width">
           <h2>Lexicon Dictionary</h2>
-          <Link to='/lookup'>Back to word lookup</Link>
+          <Link to='/lookup'>Look Up a New Word</Link>
         </div>
       </div>
     );

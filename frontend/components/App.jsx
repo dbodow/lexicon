@@ -2,10 +2,12 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import SessionFormContainer from './session_form/session_form_container';
 import WordShowContainer from './word_show/word_show_container';
+import WordSearchContainer from './word_search/word_search_container';
 import Header from './header/header';
 import Footer from './footer/footer';
 import Splash from './splash/splash';
-import { AuthRoute, ProtectedRoute } from '../util/route_util';
+import { AuthRoute, ProtectedRoute,
+         ProtectedExactRoute } from '../util/route_util';
 
 const App = () => (
   <div>
@@ -17,6 +19,8 @@ const App = () => (
       <AuthRoute path="/signup" component={SessionFormContainer} />
       <ProtectedRoute path="/lookup/:word"
                       component={WordShowContainer}/>
+      <ProtectedExactRoute path="/lookup"
+                      component={WordSearchContainer}/>
     </main>
     <Footer/>
   </div>

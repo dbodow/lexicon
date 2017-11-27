@@ -34,3 +34,11 @@
   display: inline-flex;
   align-self: flex-end;
 }
+
+.icon-button-container {
+  background-color: inherit;
+  padding: none;
+  border: none;
+  margin: none;
+  cursor: pointer;
+}
