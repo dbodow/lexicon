@@ -11,7 +11,7 @@ class Api::WordsController < ApplicationController
   def show
     @word = Word.find_by(word: params[:word]) || create_word(params[:word])
     unless @word
-      render json: ['Word not found.'], status: 404
+      render json: ["You searched for #{params[:word]}. Maybe the word was misspelled?"], status: 404
       return
     end
     render :show

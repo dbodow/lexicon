@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20171125230543) do
 
   create_table "definitions", force: :cascade do |t|
     t.string "definition", null: false
-    t.string "pos", null: false
+    t.string "pos"
     t.string "attribution"
     t.integer "word_id", null: false
     t.datetime "created_at", null: false

@@ -22,12 +22,12 @@ export default class Splash extends React.Component {
 
   renderHeroArticle() {
     return (
-      <div className="fixed-width flex-article splash-hero-container">
+      <div className="fixed-width flex-content splash-hero-container">
         <article className="splash-hero-pitch col-2-3">
           <h1>Welcome to Lexicon.</h1>
           <h2>Isn't it time to expand your lexicon?</h2>
           <p>Lexicon allows you to study and quiz yourself with lists of vocabulary words that will increase your English vocabulary.</p>
-          <Link className="signup-link article-sign-up" to='/signup'>
+          <Link className="signup-link content-sign-up" to='/signup'>
             Start Learning
             &nbsp;
             <i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
@@ -59,7 +59,7 @@ export default class Splash extends React.Component {
     return (
       <section className="homepage-about-module">
         <h1>From word lookup to quizzing and study, Lexicon helps you master new vocabulary.</h1>
-        <div className="fixed-width flex-article splash-about-container">
+        <div className="fixed-width flex-content splash-about-container">
           <div className="about-lookups sequence-box col-1-3">
             <div className="sequence-box-headers">
               <h2>1.</h2>

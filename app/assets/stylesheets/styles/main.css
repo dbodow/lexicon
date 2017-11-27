@@ -16,7 +16,7 @@
   max-width: 550px;
 }
 
-.flex-article {
+.flex-content {
   display: flex;
   height: 100%;
 }
@@ -29,7 +29,7 @@
   flex-grow: 2;
 }
 
-.article-sign-up {
+.content-sign-up {
   font-size: 20px;
   display: inline-flex;
   align-self: flex-end;

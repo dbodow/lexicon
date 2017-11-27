@@ -69,7 +69,8 @@
   flex-direction: column;
   justify-content: center;
   height: 250px;
-  padding: 20px 60px 20px 20px;
+  padding-right: 60px;
+  box-sizing: border-box;
 }
 
 .splash-hero-pitch h1 {
@@ -96,6 +97,7 @@
   justify-content: space-around;
   height: 160px;
   padding: 15px;
+  box-sizing: border-box;
 }
 
 .splash-hero-def h1 {
@@ -144,7 +146,7 @@
   align-items: center;
   max-width: 250px;
   height: 300px;
-  border: 2px solid black;
+  border: 2px solid rgb(150, 150, 150);
   border-radius: 5px;
   box-sizing: border-box;
   padding: 15px;

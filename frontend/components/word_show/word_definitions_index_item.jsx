@@ -2,8 +2,10 @@ import React from 'react';
 
 export default ({definitionText, attribution, pos}) => (
   <li className='word-definitions-index-item'>
-    <span className='pos'>{pos}</span>
-    <span className='definition-text'>{definitionText}</span>
-    <span className='definition-source'>{attribution}</span>
+    <div className='definition'>
+      <span className={`pos-box ${pos}`}>{pos}</span>
+      <span className='definition-text'>{definitionText}</span>
+    </div>
+    <div className='definition-source'>{attribution}</div>
   </li>
 );
