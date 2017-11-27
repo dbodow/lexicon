@@ -2,6 +2,7 @@ import React from 'react';
 import WordDefinitionsIndex from './word_definitions_index';
 import WordExamplesIndex from './word_examples_index';
 import WordShowHeader from './word_show_header';
+import WordShowErrors from './word_show_errors';
 
 export default class WordShow extends React.Component {
   componentDidMount() {
@@ -47,17 +48,7 @@ export default class WordShow extends React.Component {
     return(
       <div className='word-show-container'>
         <WordShowHeader />
-        <div className='word-show fixed-width'>
-          <h1 className='word-hero'>Uh oh...</h1>
-          <h2 className='word-show-error-header'>
-            Our lexicon is extensive, but we don't know that word.
-          </h2>
-          <div className='word-show-error'>
-            <span>You searched for&nbsp;</span>
-            <b>{this.props.match.params.word}</b>
-            <span>. Perhaps the word was misspelled?</span>
-          </div>
-        </div>
+        <WordShowErrors word={this.props.match.params.word} />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 .word-search-container {
   font-family: 'Asap', sans-serif;
   min-height: calc(100vh - 160px);
+  margin-bottom: 30px;
 }
 
 .word-search-form {
@@ -53,4 +54,103 @@
 
 .word-search-bar:not(:valid) ~ .search-bar-close {
 	display: none;
+}
+
+.pristine-word-search-content > h1 {
+  color: rgb(153, 153, 153);
+  font-size: 30px;
+  font-style: italic;
+  padding-bottom: 30px;
+}
+
+.pristine-word-search-content > h2 {
+  color: rgb(68, 68, 68);
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.pristine-word-search-content > p {
+  color: rgb(34, 85, 138);
+  font-size: 18px;
+  line-height: 3;
+}
+
+.demo-words-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.demo-words {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin-top: 20px;
+  border-top: 1px solid rgb(238, 238, 238);
+  border-bottom: 1px solid rgb(238, 238, 238);
+  padding-top: 15px;
+  padding-bottom: 25px;
+  width: 300px;
+}
+
+.demo-words h3 {
+  color: rgb(68, 68, 68);
+  font-size: 24px;
+  line-height: 2;
+}
+
+.demo-words h3 i {
+  padding-right: 12px;
+}
+
+.demo-words p {
+  color: rgb(34, 85, 138);
+  font-size: 18px;
+  line-height: 2.5;
+  font-style: italic;
+}
+
+.demo-words a {
+  color: rgb(153, 153, 153);
+  text-decoration: underline;
+  line-height: 1.75
+}
+
+.demo-words a:hover,
+.suggested-word-search-content a:hover {
+  color: rgb(34, 85, 138);
+}
+
+.suggested-word-search-content {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.suggested-word-search-content h2 {
+  font-size: 120px;
+  margin-bottom: 40px;
+}
+
+.suggested-word-search-content ul {
+  width: 512px;
+  column-count: 2;
+  column-gap: 50px;
+  line-height: 1.75;
+}
+
+.top-suggestion-container {
+  width: 60%;
+}
+
+.more-suggestions-container {
+  width: 40%;
+}
+
+.more-suggestions-header {
+  color: rgb(34, 85, 138);
+  font-size: 24px;
+  line-height: 3;
+  padding-top: 12px;
+  padding-bottom: 6px;
 }

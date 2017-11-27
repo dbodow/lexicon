@@ -18,6 +18,7 @@ export default class WordSearchForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if (this.state.query === '') return;
     this.props.clearErrors();
     this.props.queryPossibleWords(this.state.query);
   }
@@ -35,7 +36,7 @@ export default class WordSearchForm extends React.Component {
           <i className="fa fa-search search-bar-submit-icon"
             aria-hidden="true"/>
         </button>
-        <input type='text' onChange={this.handleChange} required
+        <input type='text' onChange={this.handleChange}
                className="word-search-bar" placeholder="LOOK UP" />
         <button type="reset" className="search-bar-close-container icon-button-container"
                 onClick={this.handleClear}>

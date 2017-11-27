@@ -1,8 +1,12 @@
 class Api::WordsController < ApplicationController
   def index
     @query_results = Word.query_wordnik(params[:query])
+    if @query_results.key?('type') && @query_results['type'] == 'error'
+      render json: [params[:query]], status: 422
+      return
+    end
     unless @query_results['totalResults'] > 0
-      render json: ["No results for #{params[:query]}."], status: 404
+      render json: [params[:query]], status: 404
       return
     end
     render json: parseQueryResults

@@ -16,7 +16,8 @@ export default class WordSearch extends React.Component {
           <WordSearchForm queryPossibleWords={this.props.queryPossibleWords}
                           clearErrors={this.props.clearErrors} />
           <WordSearchResultsIndex search={this.props.search}
-                                  errors={this.props.errors}/>
+                                  errors={this.props.errors}
+                                  history={this.props.history} />
         </div>
       </div>
     );

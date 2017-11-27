@@ -1,6 +1,7 @@
 .word-show-container {
   font-family: 'Asap', sans-serif;
   min-height: calc(100vh - 160px);
+  margin-bottom: 30px;
 }
 
 .word-show-header {
@@ -33,7 +34,6 @@
 .word-show-content {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
 }
 
 .word-definitions-container {
