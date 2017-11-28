@@ -1,9 +1,16 @@
 class ListsController < ApplicationController
 
   def index
+    @lists = currentUser.lists
+    render :index
   end
 
   def show
+    @list = List.find_by(id: params[:id])
+    if @list
+      render :show
+    else
+      render json: ["list not found"], status: 404
   end
 
   def create
@@ -23,6 +30,10 @@ class ListsController < ApplicationController
   def patch
     # patch is only used to toggle activation for inital release
     @list = List.find_by(id: params[:id])
+    unless @list
+      render json: ["list not found"], status: 404
+      return
+    end
     toggle_active_status
     render :show
   end
