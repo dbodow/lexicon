@@ -1,6 +1,7 @@
 class Api::WordsController < ApplicationController
   def index
-    sleep(0.5) # network latency
+    # sleep(0.5) # simulate network latency
+    sleep(0.2) # rate limit abusive use
     begin
       @query_results = Word.query_wordnik(params[:query])
     rescue
@@ -18,7 +19,8 @@ class Api::WordsController < ApplicationController
   end
 
   def show
-    sleep(0.5) # network latency
+    # sleep(0.5) # simulate network latency
+    sleep(0.2) # rate limit abusive use
     @word = Word.find_by(word: params[:word]) || create_word(params[:word])
     unless @word
       render json: ["You searched for #{params[:word]}. Perhaps the word was misspelled?"], status: 404

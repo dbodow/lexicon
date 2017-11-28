@@ -7,11 +7,6 @@ import ContentLoader from '../loaders/content_loader';
 import { PulseLoader } from 'react-spinners';
 
 export default class WordShow extends React.Component {
-  componentWillMount() {
-    console.log('set ui to loading');
-    this.props.setUILoading();
-  }
-
   componentDidMount() {
     this.props.querySingleWord(this.props.match.params.word);
   }

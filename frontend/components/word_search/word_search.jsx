@@ -7,10 +7,10 @@ import { PulseLoader } from 'react-spinners';
 export default class WordSearch extends React.Component {
   componentWillMount() {
     this.props.clearErrors();
+    this.props.clearEntities();
   }
 
   render() {
-    console.log("UI PROPS", this.props.ui);
     const loadingStatus = this.props.ui.loading ? '' : ' loaded';
     return (
       <div className="word-search-container">
@@ -27,6 +27,7 @@ export default class WordSearch extends React.Component {
           <WordSearchResultsIndex
             search={this.props.search} errors={this.props.errors}
             history={this.props.history} ui={this.props.ui}
+            setUILoading={this.props.setUILoading}
             className={'fade-in' + loadingStatus} />
         </div>
       </div>

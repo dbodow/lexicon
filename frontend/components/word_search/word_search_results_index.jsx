@@ -6,6 +6,7 @@ import WordShowErrors from '../word_show/word_show_errors';
 export default class WordSearchResultsIndex extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.search.length === 1 && !nextProps.ui.loading) {
+      this.props.setUILoading();
       nextProps.history.push(`lookup/${nextProps.search[0]}`);
     }
   }

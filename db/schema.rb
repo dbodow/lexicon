@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125230543) do
+ActiveRecord::Schema.define(version: 20171128184706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,40 @@ ActiveRecord::Schema.define(version: 20171125230543) do
     t.datetime "updated_at", null: false
     t.index ["example"], name: "index_examples_on_example", unique: true
     t.index ["word_id"], name: "index_examples_on_word_id"
+  end
+
+  create_table "list_words", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "listwords", force: :cascade do |t|
+    t.integer "list_id", null: false
+    t.integer "word_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["list_id", "word_id"], name: "index_listwords_on_list_id_and_word_id", unique: true
+  end
+
+  create_table "user_lists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "userlists", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "list_id"], name: "index_userlists_on_user_id_and_list_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

@@ -6,6 +6,11 @@ class Word < ApplicationRecord
   has_many :examples
   has_many :definitions
 
+  has_many :listwords
+  has_many :lists,
+           through: :listwords,
+           source: :list
+
   @@wordnik ||= Wordnik.new
 
   def self.fetch_random_words(number)

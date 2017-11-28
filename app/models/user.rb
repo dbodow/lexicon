@@ -3,6 +3,14 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
+  has_many :userlists
+  has_many :lists,
+           through: :userlists,
+           source: :list
+  has_many :words,
+           through: :lists,
+           source: :words
+
   attr_reader :password
   after_initialize :ensure_default_values
 
