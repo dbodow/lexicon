@@ -57,6 +57,8 @@ https://stackoverflow.com/questions/28980638/sticky-footer-and-content-with-100-
   background-color: rgb(77, 181, 56);
   color: white;
   font-size: 20px;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
 .switch-form-link:visited, .switch-form-link:link {
@@ -69,4 +71,6 @@ https://stackoverflow.com/questions/28980638/sticky-footer-and-content-with-100-
   padding: 10px;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
 }
