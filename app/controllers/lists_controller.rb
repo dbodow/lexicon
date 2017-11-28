@@ -12,7 +12,7 @@ class ListsController < ApplicationController
       render :show
     else
       render json: @list.errors.full_messages, status: 422
-
+    end
   end
 
   def destroy
