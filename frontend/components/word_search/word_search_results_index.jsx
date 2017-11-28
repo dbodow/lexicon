@@ -4,6 +4,12 @@ import WordShowErrors from '../word_show/word_show_errors';
 
 
 export default class WordSearchResultsIndex extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.search.length === 1 && !nextProps.ui.loading) {
+      nextProps.history.push(`lookup/${nextProps.search[0]}`);
+    }
+  }
+
   renderSuggestedMatches() {
     const results = this.props.search.sort();
     return (
@@ -92,9 +98,6 @@ export default class WordSearchResultsIndex extends React.Component {
   render() {
     if (this.props.search.length > 1) {
       return this.renderSuggestedMatches();
-    } else if (this.props.search.length === 1) {
-      this.props.history.push(`lookup/${this.props.search[0]}`);
-      return this.renderPristine();
     } else if (this.props.errors.length > 0) {
       return this.renderNoMatch();
     } else {

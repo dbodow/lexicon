@@ -36,6 +36,7 @@
 
 .nav-link {
   font-size: 15px;
+  transition: all 0.35s;
 }
 
 .nav-link i {

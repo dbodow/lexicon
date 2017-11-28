@@ -1,0 +1,24 @@
+.content-loader {
+  min-height: calc(100vh - 160px);
+  margin-bottom: 30px;
+}
+
+.spinner {
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  right: calc(50% - 28.5px);
+  padding-top: 50px;
+  transition: 1s;
+}
+
+.fade-in {
+  transition: 1s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loaded {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

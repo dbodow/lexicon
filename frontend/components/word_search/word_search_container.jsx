@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
   search: state.entities.search,
+  ui: state.ui,
   errors: state.errors.entities
 });
 

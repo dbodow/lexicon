@@ -1,6 +1,11 @@
 class Api::WordsController < ApplicationController
   def index
-    @query_results = Word.query_wordnik(params[:query])
+    sleep(0.5) # network latency
+    begin
+      @query_results = Word.query_wordnik(params[:query])
+    rescue
+      @query_results = { 'type' => 'error', 'message' => 'Wordnik API failed - check server logs' }
+    end
     if @query_results.key?('type') && @query_results['type'] == 'error'
       render json: [params[:query]], status: 422
       return
@@ -13,6 +18,7 @@ class Api::WordsController < ApplicationController
   end
 
   def show
+    sleep(0.5) # network latency
     @word = Word.find_by(word: params[:word]) || create_word(params[:word])
     unless @word
       render json: ["You searched for #{params[:word]}. Perhaps the word was misspelled?"], status: 404

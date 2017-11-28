@@ -3,8 +3,15 @@ import WordDefinitionsIndex from './word_definitions_index';
 import WordExamplesIndex from './word_examples_index';
 import WordShowHeader from './word_show_header';
 import WordShowErrors from './word_show_errors';
+import ContentLoader from '../loaders/content_loader';
+import { PulseLoader } from 'react-spinners';
 
 export default class WordShow extends React.Component {
+  componentWillMount() {
+    console.log('set ui to loading');
+    this.props.setUILoading();
+  }
+
   componentDidMount() {
     this.props.querySingleWord(this.props.match.params.word);
   }
@@ -15,12 +22,20 @@ export default class WordShow extends React.Component {
     }
   }
 
-  renderContent() {
+  renderMainContent() {
     const result = Object.keys(this.props.entities.words)[0];
+    const loadingStatus = this.props.ui.loading ? '' : ' loaded';
+    // console.log('loading status', loadingStatus, this.props.ui.loading);
     return (
       <div className='word-show-container'>
         <WordShowHeader />
-        <div className='word-show fixed-width'>
+        <div className='spinner'>
+          <PulseLoader
+            color={'#438007'}
+            loading={this.props.ui.loading}
+            />
+        </div>
+        <div className={'word-show fade-in fixed-width' + loadingStatus}>
           <h1 className='word-hero'>{result}</h1>
           <div className='word-show-content'>
             <div className='word-definitions-container'>
@@ -48,7 +63,14 @@ export default class WordShow extends React.Component {
     return(
       <div className='word-show-container'>
         <WordShowHeader />
-        <WordShowErrors word={this.props.match.params.word} />
+        <div className='spinner'>
+          <PulseLoader
+            color={'#438007'}
+            loading={this.props.ui.loading}
+            />
+        </div>
+        <WordShowErrors word={this.props.match.params.word}
+                        loading={this.props.ui.loading}/>
       </div>
     );
   }
@@ -57,7 +79,7 @@ export default class WordShow extends React.Component {
     if (this.props.errors.entities.length > 0) {
       return this.renderErrors();
     } else {
-      return this.renderContent();
+      return this.renderMainContent();
     }
   }
 }
