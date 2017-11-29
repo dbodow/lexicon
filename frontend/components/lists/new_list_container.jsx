@@ -1,7 +1,7 @@
-import WordShow from './word_show';
+import NewList from './new_list';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { querySingleWord } from '../../actions/word_actions';
+import { createList } from '../../actions/list_actions';
 import { clearErrors } from '../../actions/error_actions';
 import { setUILoading } from '../../actions/ui_actions';
 
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  querySingleWord: query => dispatch(querySingleWord(query)),
+  createList: () => dispatch(createList()),
   clearErrors: () => dispatch(clearErrors()),
   setUILoading: () => dispatch(setUILoading())
 });
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => ({
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(WordShow));
+)(NewList));

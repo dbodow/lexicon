@@ -1,18 +1,18 @@
-import WordShow from './word_show';
+import ListsIndex from './lists_index';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { querySingleWord } from '../../actions/word_actions';
+import { fetchListsIndex } from '../../actions/list_actions';
 import { clearErrors } from '../../actions/error_actions';
 import { setUILoading } from '../../actions/ui_actions';
 
 const mapStateToProps = state => ({
-  entities: state.entities,
+  lists: state.entities.lists,
   errors: state.errors,
   ui: state.ui
 });
 
 const mapDispatchToProps = dispatch => ({
-  querySingleWord: query => dispatch(querySingleWord(query)),
+  fetchListsIndex: () => dispatch(fetchListsIndex()),
   clearErrors: () => dispatch(clearErrors()),
   setUILoading: () => dispatch(setUILoading())
 });
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => ({
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(WordShow));
+)(ListsIndex));

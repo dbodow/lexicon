@@ -6,6 +6,9 @@ import WordSearchContainer from './word_search/word_search_container';
 import Header from './header/header';
 import Footer from './footer/footer';
 import Splash from './splash/splash';
+import ListsIndexContainer from './lists/lists_index_container';
+import NewListContainer from './lists/new_list_container';
+import ListShowContainer from './lists/list_show_container';
 import { AuthRoute, ProtectedRoute,
          ProtectedExactRoute } from '../util/route_util';
 
@@ -20,7 +23,11 @@ const App = () => (
       <ProtectedRoute path="/lookup/:word"
                       component={WordShowContainer}/>
       <ProtectedExactRoute path="/lookup"
-                      component={WordSearchContainer}/>
+                           component={WordSearchContainer}/>
+      <ProtectedExactRoute exact path="/lists"
+                           component={ListsIndexContainer} />
+      <ProtectedRoute path="/lists/new" component={NewListContainer}/>
+      <ProtectedRoute path="/lists/:id(\d+)" component={ListShowContainer}/>
     </main>
     <Footer/>
   </div>

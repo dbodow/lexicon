@@ -3,9 +3,11 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  has_many :userlists
+  has_many :user_lists,
+           dependent: :destroy
+
   has_many :lists,
-           through: :userlists,
+           through: :user_lists,
            source: :list
   has_many :words,
            through: :lists,

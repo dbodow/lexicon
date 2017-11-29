@@ -37,8 +37,11 @@ ActiveRecord::Schema.define(version: 20171128184706) do
   end
 
   create_table "list_words", force: :cascade do |t|
+    t.integer "list_id", null: false
+    t.integer "word_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["list_id", "word_id"], name: "index_list_words_on_list_id_and_word_id", unique: true
   end
 
   create_table "lists", force: :cascade do |t|
@@ -49,25 +52,12 @@ ActiveRecord::Schema.define(version: 20171128184706) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "listwords", force: :cascade do |t|
-    t.integer "list_id", null: false
-    t.integer "word_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["list_id", "word_id"], name: "index_listwords_on_list_id_and_word_id", unique: true
-  end
-
   create_table "user_lists", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "userlists", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "list_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "list_id"], name: "index_userlists_on_user_id_and_list_id", unique: true
+    t.index ["user_id", "list_id"], name: "index_user_lists_on_user_id_and_list_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

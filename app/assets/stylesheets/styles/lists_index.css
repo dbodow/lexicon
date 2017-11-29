@@ -1,0 +1,160 @@
+.lists-index-container {
+  font-family: 'Asap', sans-serif;
+  min-height: calc(100vh - 160px);
+  margin-bottom: 30px;
+}
+
+.lists-index-hero {
+  background-image: linear-gradient(rgba(0,0,0,0.3) 0px ,rgba(0,0,0,0.3) 20%,rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 90%), url("https://s3-us-west-1.amazonaws.com/lexicon-dev/typewriter-list-hero.jpeg");
+  height: 350px;
+  background-size: 100%;
+  background-position: 50% 20%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+}
+
+.lists-index-hero h1 {
+  color: white;
+  font-size: 40px;
+}
+
+.lists-index-hero h2 {
+  color: white;
+  font-size: 20px;
+  line-height: 2;
+  margin-bottom:80px;
+}
+
+.lists-index {
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-index-list-management {
+  width: 23%
+}
+
+.list-index-content {
+  width: 73%
+}
+
+.navigate-to-new-list-button {
+  display: flex;
+  justify-content: center;
+  border: 3px solid white;
+  background-color: #4db538;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+  padding: 5px 0;
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navigate-to-new-list-button a, .navigate-to-new-list-button a:link,
+.navigate-to-new-list-button a:visited, .navigate-to-new-list-button a:active {
+  color: white;
+}
+
+.navigate-to-new-list-button:hover {
+  border: 3px solid #eeeeee;
+}
+
+.list-ideas {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-ideas h3 {
+  height: 30px;
+  border-bottom: 1px solid rgb(105, 172, 29);
+  color: rgb(51, 51, 51);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.list-ideas i {
+  padding-right: 5px;
+}
+
+.list-ideas h3 i {
+  color: #4db538;
+}
+
+.list-ideas-item {
+  height: 30px;
+  border-bottom: 1px solid rgb(238, 238, 238);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: rgb(34, 85, 138);
+}
+
+.list-ideas-item a, .list-ideas-item a:link,
+.list-ideas-item a:visited, .list-ideas-item a:active {
+  color: rgb(34, 85, 138);
+}
+
+.list-ideas-item a:hover {
+  text-decoration: underline;
+}
+
+.list-index-content h3 {
+  border-bottom: 1px solid rgb(238, 238, 238);
+  color: rgb(51, 51, 51);
+  font-size: 20px;
+  padding: 5px 0;
+}
+
+.list-index-content h3 i {
+  color: #b9b9b9;
+  padding-right: 7px;
+}
+
+.all-lists-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.list-index-item {
+  box-sizing: border-box;
+  width: 150px;
+  padding: 10px 5px;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 25%;
+  height: 150px;
+  min-width: 0;
+}
+
+.list-index-item a, .list-index-item a:link,
+.list-index-item a:visited, .list-index-item a:active,
+.list-index-item a:hover {
+  color: rgb(34, 85, 138);
+  font-size: 12px;
+}
+
+.list-index-item-title {
+  box-sizing: border-box;
+}
+
+.list-index-item h4 {
+  color: rgb(51, 51, 51);
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.list-index-item-description {
+  color: rgb(102, 102, 102);
+  line-height: 1.5;
+  font-size: 12px;
+}

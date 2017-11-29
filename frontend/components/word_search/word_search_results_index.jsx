@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import WordShowErrors from '../word_show/word_show_errors';
-
+import { ActionLink } from '../../util/route_util';
 
 export default class WordSearchResultsIndex extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -56,11 +56,26 @@ export default class WordSearchResultsIndex extends React.Component {
             </h3>
             <p>Enjoy the English language</p>
             <ul className="demo-words-index">
-              <li><Link to="lookup/bumfuzzle">bumfuzzle</Link></li>
-              <li><Link to="lookup/defenestrate">defenestrate</Link></li>
-              <li><Link to="lookup/flocculent">flocculent</Link></li>
-              <li><Link to="lookup/frogman">frogman</Link></li>
-              <li><Link to="lookup/logophile">logophile</Link></li>
+              <li><ActionLink to="lookup/bumfuzzle"
+                text="bumfuzzle"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/defenestrate"
+                text="defenestrate"
+                action={this.props.setUILoading} 
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/flocculent"
+                text="flocculent"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/frogman"
+                text="frogman"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/logophile"
+                text="logophile"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
             </ul>
           </div>
           <div className='demo-words'>
@@ -70,11 +85,26 @@ export default class WordSearchResultsIndex extends React.Component {
             </h3>
             <p>Learn vocabulary from a new field</p>
             <ul className="demo-words-index">
-              <li><Link to="lookup/aria">aria</Link></li>
-              <li><Link to="lookup/fugue">fugue</Link></li>
-              <li><Link to="lookup/leitmotif">leitmotif</Link></li>
-              <li><Link to="lookup/octave">octave</Link></li>
-              <li><Link to="lookup/timbre">timbre</Link></li>
+              <li><ActionLink to="lookup/aria"
+                text="aria"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/fugue"
+                text="fugue"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/leitmotif"
+                text="leitmotif"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/octave"
+                text="octave"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/timbre"
+                text="timbre"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
             </ul>
           </div>
           <div className='demo-words'>
@@ -84,11 +114,27 @@ export default class WordSearchResultsIndex extends React.Component {
             </h3>
             <p>Study for the big exam</p>
             <ul className="demo-words-index">
-              <li><Link to="lookup/corpulent">corpulent</Link></li>
-              <li><Link to="lookup/diaphanous">diaphanous</Link></li>
-              <li><Link to="lookup/enervate">enervate</Link></li>
-              <li><Link to="lookup/melancholy">melancholy</Link></li>
-              <li><Link to="lookup/terrestrial">terrestrial</Link></li>
+              <li><ActionLink to="lookup/corpulent"
+                text="corpulent"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/diaphanous"
+                text="diaphanous"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/enervate"
+                text="enervate"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink to="lookup/melancholy"
+                text="melancholy"
+                action={this.props.setUILoading}
+                history={this.props.history}/></li>
+              <li><ActionLink
+                to="lookup/terrestrial"
+                history={this.props.history}
+                action={this.props.setUILoading}
+                text="terrestrial"/></li>
             </ul>
           </div>
         </div>

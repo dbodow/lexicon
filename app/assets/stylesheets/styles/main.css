@@ -42,3 +42,10 @@
   margin: none;
   cursor: pointer;
 }
+
+.flex-stretch-preventer {
+  background: none;
+  border: none;
+  height: 0px;
+  flex-grow: 100;
+}

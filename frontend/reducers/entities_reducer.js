@@ -1,5 +1,7 @@
 import { RECEIVE_WORD_DATA,
          RECEIVE_SEARCH_DATA } from '../actions/word_actions';
+import { RECEIVE_LIST_SHOW,
+         RECEIVE_LISTS_INDEX } from '../actions/list_actions';
 import { RECEIVE_ENTITIES_ERRORS } from '../actions/error_actions';
 import { CLEAR_ENTITIES } from '../actions/entities_actions';
 
@@ -9,6 +11,7 @@ const _nullEntities = {
   words: {},
   examples: {},
   definitions: {},
+  lists: {},
   search: []
 };
 
@@ -22,6 +25,10 @@ export default (state = _nullEntities, action) => {
       return merge({}, _nullEntities, action.entities);
     case RECEIVE_SEARCH_DATA:
       return merge({}, _nullEntities, {search: action.results});
+    case RECEIVE_LISTS_INDEX:
+      return merge({}, _nullEntities, action.entities);
+    case RECEIVE_LIST_SHOW:
+      return merge({}, _nullEntities, action.entities);
     case RECEIVE_ENTITIES_ERRORS:
       oldState = merge({}, state);
       delete oldState.search;

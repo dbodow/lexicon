@@ -25,3 +25,21 @@ User.create(username: 'gGMarquez', password: 'password', points: 1200)
 # lightning bolt user
 
 User.create(username: 'ebWhite', password: 'password', points: 2000)
+
+List.create_list( User.find_by(username: 'eHemmingway'),
+                  ['bumfuzzle', 'defenestrate', 'flocculent', 'frogman', 'logophile'],
+                   List.new(
+                          title: "Fun words to enjoy the beauty of English!",
+                          description: "This is a list of some of our favorite words. Will they come up in everyday usage? No. Will they be fun to use? Definitely.",
+                          active: true
+                          )
+                )
+
+List.create_list( User.find_by(username: 'eHemmingway'),
+                  ['aria', 'fugue', 'leitmotif', 'octave', 'timbre'],
+                   List.new(
+                          title: "Music and Sound: a technical vocabulary for artistic practice.",
+                          description: "Music's not your forte? No problem. Vocabulary isn't just about academics. Every field has its own lexicon, and music is no different. This list covers technical words from music to expany your knowledge of the language of sound.",
+                          active: true
+                          )
+                )

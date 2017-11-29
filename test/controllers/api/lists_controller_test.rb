@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ListsControllerTest < ActionDispatch::IntegrationTest
+class Api::ListsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

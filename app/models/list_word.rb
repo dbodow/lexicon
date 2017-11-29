@@ -3,5 +3,5 @@ class ListWord < ApplicationRecord
   validates :word_id, uniqueness: { scope: :list_id }
 
   belongs_to :word
-  belongs_to :listwords
+  belongs_to :list
 end
