@@ -41,3 +41,20 @@ export const fetchListsIndex = () => dispatch => {
     .always(() => dispatch(clearUILoading()))
   );
 };
+
+export const toggleListActiveStatus = id => dispatch => {
+  dispatch(setUILoading());
+  return ( ListAPIUtil.toggleListActiveStatus(id)
+    .then(entities => dispatch(receiveListShow(entities)))
+    .fail(errors => dispatch(receiveEntitiesErrors(errors.responseJSON)))
+    .always(() => dispatch(clearUILoading()))
+  );
+};
+
+export const deleteList = id => dispatch => {
+  dispatch(setUILoading());
+  return ( ListAPIUtil.deleteList(id)
+    .fail(errors => dispatch(receiveEntitiesErrors(errors.responseJSON)))
+    .always(() => dispatch(clearUILoading()))
+  );
+};

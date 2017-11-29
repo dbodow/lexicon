@@ -4,8 +4,8 @@ import Root from './components/root';
 import configureStore from './store/store';
 
 import { login, signup, logout } from './actions/session_actions';
-import { fetchCurrentUserLists, fetchList, createList }
-  from './util/list_api_util';
+import { fetchCurrentUserLists, fetchList, createList, toggleListActiveStatus,
+         deleteList } from './util/list_api_util';
 
 document.addEventListener('DOMContentLoaded', () => {
   const rootEl = document.getElementById('root');
@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchCurrentUserLists = fetchCurrentUserLists;
   window.fetchList = fetchList;
   window.createList = createList;
+  window.toggleListActiveStatus = toggleListActiveStatus;
+  window.deleteList = deleteList;
 
   ReactDOM.render(<Root store={store}/>, rootEl);
 });

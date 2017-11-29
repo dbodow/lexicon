@@ -10,7 +10,11 @@ class Api::ListsController < ApplicationController
   end
 
   def show
-    @list = List.includes(:list_words).includes(:words).where(id: params[:id])
+    @list = List.includes(:list_words)
+      .includes(:words)
+      .includes(:definitions)
+      .includes(:examples)
+      .where(id: params[:id])
     if @list.empty?
       render json: ["list not found"], status: 404
     else
@@ -34,10 +38,11 @@ class Api::ListsController < ApplicationController
     @list.destroy if @list
   end
 
-  def patch
-    # patch is only used to toggle activation for inital release
-    @list = List.find_by(id: params[:id])
-    unless @list
+  def update
+    # update is only used to toggle activation for inital release
+    @list = List.includes(:list_words).includes(:words).where(id: params[:id])
+    # byebug
+    if @list.empty?
       render json: ["list not found"], status: 404
       return
     end
@@ -56,6 +61,7 @@ class Api::ListsController < ApplicationController
   end
 
   def toggle_active_status
-    @list.active = !@list.active
+    @list.first.active = !@list.first.active
+    @list.first.save
   end
 end

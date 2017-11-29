@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createList: () => dispatch(createList()),
+  createList: list => dispatch(createList(list)),
   clearErrors: () => dispatch(clearErrors()),
   setUILoading: () => dispatch(setUILoading())
 });

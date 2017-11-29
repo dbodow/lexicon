@@ -5,12 +5,12 @@
 }
 
 .lists-index-hero {
-  background-image: linear-gradient(rgba(0,0,0,0.3) 0px ,rgba(0,0,0,0.3) 20%,rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 90%), url("https://s3-us-west-1.amazonaws.com/lexicon-dev/typewriter-list-hero.jpeg");
+  background-image: linear-gradient(rgba(0,0,0,0.2) 0px ,rgba(0,0,0,0.2) 20%,rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 90%), url("https://s3-us-west-1.amazonaws.com/lexicon-dev/typewriter-list-hero.jpeg");
   height: 350px;
   background-size: 100%;
   background-position: 50% 20%;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  /*background-attachment: fixed;*/
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -130,7 +130,7 @@
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: 25%;
-  height: 150px;
+  height: 175px;
   min-width: 0;
 }
 

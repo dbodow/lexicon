@@ -37,6 +37,7 @@ const mapStateToProps = state => {
 };
 
 export class ActionLink extends React.Component {
+  // args: history, action, to, text
   navigateWithAction(e) {
     console.log("navigating...");
     e.preventDefault();

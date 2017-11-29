@@ -6,6 +6,12 @@ class List < ApplicationRecord
   has_many :words,
            through: :list_words,
            source: :word
+  has_many :definitions,
+           through: :words,
+           source: :definitions
+  has_many :examples,
+           through: :words,
+           source: :examples
 
   has_many :user_lists,
            dependent: :destroy

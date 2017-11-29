@@ -1,0 +1,228 @@
+.list-show-page-content {
+  font-family: 'Asap', sans-serif;
+  min-height: calc(100vh - 160px);
+  padding-bottom: 30px;
+}
+
+.list-show-data-background {
+  background-image: linear-gradient(white 0px, rgb(230, 230, 230) 100%);
+}
+
+.list-show-data-positioning {
+  display: flex;
+}
+
+.list-show-data {
+  width: 66.6667%;
+  padding: 30px 0;
+}
+
+.list-show-data > h1 {
+  color: black;
+  font-size: 12px;
+}
+
+.list-show-data > h2 {
+  color: black;
+  font-size: 30px;
+  line-height: 1.75;
+}
+
+.list-show-data > h3 {
+  color: rgb(51, 51, 51);
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.list-show-data > p {
+  line-height: 2;
+  color: rgb(51, 51, 51);
+  margin-top: 15px;
+}
+
+.list-show-start-quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  width: 230px;
+  height: 200px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(0,0,0,0.2) 1px 1px 2px 0;
+  transition: 0.25s;
+}
+
+.list-show-start-quiz:hover {
+  box-shadow: rgba(0,0,0,0.5) 1px 1px 2px 0;
+}
+
+.list-show-start-quiz h4 {
+  color: rgb(34, 85, 138);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.list-show-start-quiz i {
+  color: #6eaf27;
+  margin-right: 10px;
+}
+
+.list-show-start-quiz p {
+  color: rgb(134, 134, 134);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.list-show-start-quiz a, .list-show-start-quiz a:link,
+.list-show-start-quiz a:visited, .list-show-start-quiz a:active {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  background-color: #f3f3f3;
+  transition: 0.2s;
+  color: rgb(102, 102, 102);
+}
+
+.list-show-start-quiz a:hover {
+  background-color: rgb(238, 238, 238);
+}
+
+.list-show-management {
+  width: 33.3333%;
+  padding: 30px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.list-show-navigate-back, .list-show-navigate-back:link,
+.list-show-navigate-back:visited, .list-show-navigate-back:active {
+  color: rgb(119, 119, 119);
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.list-show-navigate-back:hover {
+  color: rgb(51, 51, 51);
+}
+
+.list-show-navigate-back i {
+  color: #aaa;
+  padding-right: 7px;
+  transition: 0.2s;
+}
+
+.list-show-navigate-back:hover i {
+  color: #777;
+}
+
+.list-show-toggle-list-activation {
+  color: rgb(119, 119, 119);
+  transition: 0.2s;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.list-show-toggle-list-activation > div {
+  display: flex;
+  align-items: center;
+}
+
+.list-show-toggle-list-activation:hover {
+  color: rgb(51, 51, 51);
+}
+
+.list-show-toggle-list-activation i {
+  padding-right: 7px;
+}
+
+.list-activity-false i {
+  color: rgba(110, 175, 39, 0.7);
+  transition: 0.2s;
+}
+
+.list-activity-false:hover i {
+  color: rgba(110, 175, 39, 1);
+}
+
+.list-activity-true i {
+  color: rgba(227, 65, 47, 0.7);
+  transition: 0.2s;
+}
+
+.list-activity-true:hover i {
+  color: rgba(227, 65, 47, 1);
+}
+
+.list-show-delete-list-button {
+  color: rgb(119, 119, 119);
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.list-show-delete-list-button:hover {
+  color: rgb(51, 51, 51);
+}
+
+.list-show-delete-list-button i {
+  padding-right: 7px;
+  color: rgba(227, 65, 47, 0.7);
+  transition: 0.2s;
+}
+
+.list-show-delete-list-button:hover i {
+  color: rgba(227, 65, 47, 1)
+}
+
+.list-show-index {
+  list-style-type: decimal;
+  width: 50%;
+}
+
+.list-show-index-item {
+  color: #afafbb;
+  font-size: 16px;
+  padding-top: 50px;
+}
+
+.list-show-index-item a, .list-show-index-item a:link,
+.list-show-index-item a:visited, .list-show-index-item a:active {
+  font-size: 44px;
+  color: rgb(34, 85, 138);
+}
+
+.list-show-index-item a:hover {
+  text-decoration: underline;
+}
+
+.list-show-definition {
+  color: rgb(102, 102, 102);
+  font-size: 20px;
+  line-height: 2;
+}
+
+.list-show-definition li:before {
+  font-family: 'FontAwesome';
+  content: '\f00c';
+  margin: 0 5px 0 -25px;
+  color: #6eaf27;
+}
+
+.list-show-example {
+  color: rgb(102, 102, 102);
+  font-size: 15px;
+  line-height: 2;
+  font-style: italic;
+}
+
+.list-show-example b {
+  font-weight: 700;
+}

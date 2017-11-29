@@ -21,3 +21,17 @@ export const fetchList = listId => (
     url: `api/lists/${listId}`
   })
 );
+
+export const toggleListActiveStatus = listId => (
+  $.ajax({
+    method: 'patch',
+    url: `api/lists/${listId}`
+  })
+);
+
+export const deleteList = listId => (
+  $.ajax({
+    method: 'delete',
+    url: `api/lists/${listId}`
+  })
+);
