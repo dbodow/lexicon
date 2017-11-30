@@ -18,11 +18,11 @@ class Api::QuizzesController < ApplicationController
     # require an additional api call, so fetch one extra word in case
     # of collision. API returns unique words, so dual collisions
     # are impossible.
-    Word.fetch_random_words(5).each do |str_word|
+    Word.fetch_random_words(4).each do |str_word|
       unless correct_answer_str == str_word
         wrong_answers << str_word
       end
-      break if wrong_answers.length >= 4
+      break if wrong_answers.length >= 3
     end
     wrong_answers
   end

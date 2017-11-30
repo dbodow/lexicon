@@ -1,4 +1,4 @@
-import * as QuizAPIUtil from '../util/word_api_util';
+import * as QuizAPIUtil from '../util/quiz_api_util';
 import { receiveEntitiesErrors } from './error_actions';
 import { setUILoading, clearUILoading } from './ui_actions';
 

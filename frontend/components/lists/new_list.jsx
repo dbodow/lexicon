@@ -49,7 +49,7 @@ export default class NewList extends React.Component {
   }
 
   wordsListToArray() {
-    const words = this.state.wordsList.split(/[^A-Za-z]/).filter(Boolean);
+    const words = this.state.wordsList.split(/[^A-Za-z'-]/).filter(Boolean);
     return Array.from(new Set(words));
   }
 
@@ -81,8 +81,8 @@ export default class NewList extends React.Component {
   render () {
     return (
       <form className="new-list-form fixed-width">
-        <h1>Let's make a new list!</h1>
-        <h2>Lexicon can help you study words of any difficulty and any topic.</h2>
+        <h1>Need to learn some new words?</h1>
+        <h2>Create a list of any words you want to quiz.</h2>
         <div className="skinny-spinner">
           <PulseLoader
             color={'#438007'}

@@ -9,7 +9,7 @@ import Splash from './splash/splash';
 import ListsIndexContainer from './lists/lists_index_container';
 import NewListContainer from './lists/new_list_container';
 import ListShowContainer from './lists/list_show_container';
-import QuizContainer from './quiz/quiz';
+import QuizContainer from './quiz/quiz_container';
 import { AuthRoute, ProtectedRoute,
          ProtectedExactRoute } from '../util/route_util';
 
