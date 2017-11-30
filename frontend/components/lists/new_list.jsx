@@ -38,6 +38,9 @@ export default class NewList extends React.Component {
     if (this.wordsListToArray(this.state.wordsList).length === 0) {
       errors.push("Please select some words for your list.");
     }
+    if (this.wordsListToArray(this.state.wordsList).length > 20) {
+      errors.push("Lexicon relies on a free API to locate data for our users' lists. Please limit yourself to only 20 words per list so that we can remain within our API call limit.");
+    }
     if (errors.length !== 0) {
       alert(errors.join('\n'));
       return false;
