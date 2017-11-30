@@ -1,0 +1,15 @@
+.quiz-container {
+  font-family: 'Asap', sans-serif;
+  min-height: calc(100vh - 160px);
+}
+
+.quiz {
+  padding: 30px 0;
+  background-color: #2c3e2e;
+  height: 525px;
+  box-sizing: border-box;
+}
+
+.under-quiz {
+  padding: 30px 0;
+}

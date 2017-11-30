@@ -36,7 +36,9 @@ class Word < ApplicationRecord
   end
 
   def self.fetch_random_words(number)
-    @@wordnik.fetch_random_words(number).parsed_response
+    @@wordnik.fetch_random_words(number).parsed_response.map do |res|
+      res['word']
+    end
   end
 
   def self.fetch_definitions(word)

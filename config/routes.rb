@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     resources :words, param: :word, only: [:index, :show]
     resources :lists, only: [:index, :show, :create, :destroy, :update]
+    resources :quizzes, only: [:create]
   end
 
   root to: 'static_pages#root'

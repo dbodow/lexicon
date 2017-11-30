@@ -9,6 +9,7 @@ import Splash from './splash/splash';
 import ListsIndexContainer from './lists/lists_index_container';
 import NewListContainer from './lists/new_list_container';
 import ListShowContainer from './lists/list_show_container';
+import QuizContainer from './quiz/quiz';
 import { AuthRoute, ProtectedRoute,
          ProtectedExactRoute } from '../util/route_util';
 
@@ -28,6 +29,7 @@ const App = () => (
                            component={ListsIndexContainer} />
       <ProtectedRoute path="/lists/new" component={NewListContainer}/>
       <ProtectedRoute path="/lists/:id(\d+)" component={ListShowContainer}/>
+      <ProtectedRoute path="/quiz" component={QuizContainer}/>
     </main>
     <Footer/>
   </div>

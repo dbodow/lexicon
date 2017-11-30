@@ -37,6 +37,10 @@ class User < ApplicationRecord
     self.password_digest = BCrypt::Password.create(password)
   end
 
+  def increment_points(amount)
+    self.points += amount
+    self.save
+  end
 
   private
 
