@@ -12,6 +12,13 @@
   transition: 1s;
 }
 
+.skinny-spinner {
+  display: flex;
+  justify-content: center;
+  height: 75px;
+  align-items: center;
+}
+
 .fade-in {
   transition: 1s;
   opacity: 0;

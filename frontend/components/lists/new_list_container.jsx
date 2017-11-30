@@ -2,8 +2,9 @@ import NewList from './new_list';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createList } from '../../actions/list_actions';
-import { clearErrors } from '../../actions/error_actions';
+import { clearErrors, receiveUIErrors } from '../../actions/error_actions';
 import { setUILoading } from '../../actions/ui_actions';
+import { clearEntities } from '../../actions/entities_actions';
 
 const mapStateToProps = state => ({
   entities: state.entities,
@@ -13,6 +14,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   createList: list => dispatch(createList(list)),
+  receiveUIErrors: errors => dispatch(receiveUIErrors(errors)),
+  clearEntities: () => dispatch(clearEntities()),
   clearErrors: () => dispatch(clearErrors()),
   setUILoading: () => dispatch(setUILoading())
 });
