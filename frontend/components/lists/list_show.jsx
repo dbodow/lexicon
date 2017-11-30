@@ -97,7 +97,10 @@ export default class ListShow extends React.Component {
               <ListShowIndexItem word={word}
                 definition={this.topDefinition(word)}
                 example={this.topExample(word)}
-                key={word} />
+                key={word} setUILoading={this.props.setUILoading}
+                clearEntities={this.props.clearEntities}
+                history={this.props.history}
+                />
             ))}
           </ol> :
         "" }

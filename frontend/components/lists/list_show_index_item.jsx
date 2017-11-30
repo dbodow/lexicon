@@ -8,11 +8,19 @@ export default class ListShowIndexItem extends React.Component {
     return exampleText.split(word);
   }
 
+  navigateToWordShow(e) {
+    this.props.clearEntities();
+    this.props.setUILoading();
+    this.props.history.push(`/lookup/${this.props.word}`);
+  }
+
   render() {
     const exampleTextPieces = this.parseExampleTextEmphasis();
     return (
       <li className='list-show-index-item'>
-        <Link to={`/lookup/${this.props.word}`}>{this.props.word}</Link>
+        <a onClick={this.navigateToWordShow.bind(this)}>
+          {this.props.word}
+        </a>
         <ul className='list-show-definition'>
           <li>
             {this.props.definition}

@@ -6,6 +6,7 @@ import { fetchListShow,
          deleteList } from '../../actions/list_actions';
 import { clearErrors } from '../../actions/error_actions';
 import { setUILoading } from '../../actions/ui_actions';
+import { clearEntities } from '../../actions/entities_actions';
 
 const mapStateToProps = state => ({
   words: state.entities.words,
@@ -20,6 +21,7 @@ const mapDispatchToProps = dispatch => ({
   fetchListShow: id => dispatch(fetchListShow(id)),
   toggleListActiveStatus: id => dispatch(toggleListActiveStatus(id)),
   deleteList: id => dispatch(deleteList(id)),
+  clearEntities: () => dispatch(clearEntities()),
   clearErrors: () => dispatch(clearErrors()),
   setUILoading: () => dispatch(setUILoading())
 });
