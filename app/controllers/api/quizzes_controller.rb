@@ -7,6 +7,7 @@ class Api::QuizzesController < ApplicationController
     @solution = current_user.words.where('lists.active' => true).sample
     @correct_answer = Datamuse.new.fetch_top_synonym(@solution.word)['word']
     @wrong_answers = fetch_random_wrong_answers(@correct_answer)
+    @user = current_user
     render :show
   end
 

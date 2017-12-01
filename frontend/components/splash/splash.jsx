@@ -27,7 +27,7 @@ export default class Splash extends React.Component {
           <h1>Welcome to Lexicon.</h1>
           <h2>Isn't it time to expand your lexicon?</h2>
           <p>Lexicon allows you to study and quiz yourself with lists of vocabulary words that will increase your English vocabulary.</p>
-          <Link className="signup-link content-sign-up" to='/signup'>
+          <Link className="signup-link content-sign-up" to='/quiz'>
             Start Learning
             &nbsp;
             <i className="fa fa-arrow-circle-right" aria-hidden="true"></i>

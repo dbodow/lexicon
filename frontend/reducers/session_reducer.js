@@ -1,4 +1,5 @@
-import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
+import { RECEIVE_CURRENT_USER,
+         UPDATE_USER_POINTS } from '../actions/session_actions';
 
 import merge from 'lodash/merge';
 
@@ -11,6 +12,14 @@ export default (state = _nullUser, action) => {
   switch(action.type) {
     case RECEIVE_CURRENT_USER:
       return merge({}, { currentUser: action.currentUser });
+    case UPDATE_USER_POINTS:
+      return merge({}, state.currentUser, {
+        currentUser: {
+          id: state.currentUser.id,
+          username: state.currentUser.username,
+          points: action.points
+        }
+      });
     default:
       return state;
   }
