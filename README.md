@@ -1,7 +1,8 @@
-# README
+# Lexicon
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Lexicon is a vocabulary study site deeply inspired by www.vocabulary.com.
+It allows users to look up words in a dictionary, create lists of words to
+study, and quiz their understanding of these words.
 
 Things you may want to cover:
 

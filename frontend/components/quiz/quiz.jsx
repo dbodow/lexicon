@@ -25,15 +25,21 @@ export default class Quiz extends React.Component {
     this.props.fetchQuizQuestion().then(this.randomizeAnswers.bind(this));
   }
 
-  fetchNextQuestion() {
-    this.props.setUILoading();
-    this.props.fetchQuizQuestion(this.state.isLastQuestionCorrect)
-      .then(() => this.randomizeAnswers());
+  resetState() {
     this.setState({
       isLastQuestionCorrect: false,
       lastGuessStatus: PRISTINE,
-      answerLoaded: false
+      answerLoaded: false,
+      clickedGuesses: []
     });
+  }
+
+  fetchNextQuestion() {
+    this.props.setUILoading();
+    this.resetState();
+    this.props.fetchQuizQuestion(this.state.isLastQuestionCorrect)
+      .then(() => this.randomizeAnswers())
+      .then(() => this.resetState());
   }
 
   proceedToNextQuestion() {
@@ -152,6 +158,10 @@ export default class Quiz extends React.Component {
     }
   }
 
+  uiLoadedClass() {
+    return (this.props.ui.loading) ? '' : 'loaded';
+  }
+
   render() {
     return(
       <div className='quiz-container'>
@@ -161,15 +171,17 @@ export default class Quiz extends React.Component {
             <div className='quiz-content-top'>
               <div className='quiz-questions'>
                 <div className='quiz-questions-box'>
-                  <h1><b>{this.questionWord()}</b> means:</h1>
-                  <ul className='quiz-answer-index'>
-                    {this.state.answerChoices.map(answerChoice => (
-                      <QuizAnswerIndexItem key={answerChoice}
-                        word={answerChoice} onClick={this.handleGuess.bind(this, answerChoice)}
-                        correct={this.isCorrectAnswer(answerChoice)}
-                        className={`quiz-answer-index-item ${this.clickedAnswerClass(answerChoice)}`}/>
-                    ))}
-                  </ul>
+                  <div className={`quiz-questions-fader ${this.uiLoadedClass()}`}>
+                    <h1><b>{this.questionWord()}</b> means:</h1>
+                    <ul className='quiz-answer-index'>
+                      {this.state.answerChoices.map(answerChoice => (
+                        <QuizAnswerIndexItem key={answerChoice}
+                          word={answerChoice} onClick={this.handleGuess.bind(this, answerChoice)}
+                          correct={this.isCorrectAnswer(answerChoice)}
+                          className={`quiz-answer-index-item ${this.clickedAnswerClass(answerChoice)}`}/>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div className={`quiz-answers ${this.answerLoadedClass()}`}>
