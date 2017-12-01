@@ -10,27 +10,27 @@ The web app allows users to:
 * Quiz their understanding of words on their lists
 
 ## Table of Contents
-* [Features (non-technical)](features)
-  * [Getting Started](getting-started)
-  * [Looking Up Words](looking-up-words)
-  * [Creating a Study Program](creating-a-study-program)
-  * [Quizzing Words](quizzing-words)
-* [Code Highlights (technical)](code-highlights)
-  * [Working with Word Data APIs](working-with-data-apis)
-  * [Using Animations to Improve UX](using-animations-to-improve-ux)
-* [Roadmap](roadmap)
-  * [Responsive Mobile Design](responsive-mobile-design)
-  * [List Search & Subscription](list-search-and-subscription)
-  * [Word Mastery](word-mastery)
+* [Features (non-technical)](#features)
+  * [Getting Started](#getting-started)
+  * [Looking Up Words](#looking-up-words)
+  * [Creating a Study Program](#creating-a-study-program)
+  * [Quizzing Words](#quizzing-words)
+* [Code Highlights (technical)](#code-highlights)
+  * [Working with Word Data APIs](#working-with-data-apis)
+  * [Using Animations to Improve UX](#using-animations-to-improve-ux)
+* [Roadmap](#roadmap)
+  * [Responsive Mobile Design](#responsive-mobile-design)
+  * [List Search and Subscription](#list-search-and-subscription)
+  * [Word Mastery](#word-mastery)
 
-## [Features](#features)
-### [Getting Started](#getting-started)
+## Features
+### Getting Started
 Lexicon's *list* and *quiz* features require a user account.  
 
 To register a free account, simply click the *Sign Up* button on the navigation header; no email address is required to register. Existing
 users may log in to access word lists and take interactive quizzes.
 
-### [Looking Up Words](#looking-up-words)
+### Looking Up Words
 To search for a word, first click the *Look Up* link on navigation header.
 Lexicon will direct you to a search bar.  
 
@@ -40,7 +40,7 @@ list of suggested queries.
 
 ![Lexicon provides a responsive, intuitive dictionary functionality](./readme_assets/lexicon_search.gif)
 
-### [Creating a Study Program](#creating-a-study-program)
+### Creating a Study Program
 While logged in, users can manage lists of words to build a vocabulary study program.  
 
 First, click the *Lists* link on the navigation header. Lexicon will
@@ -75,7 +75,7 @@ To deactivate a list, click the *Remove List from Study Program* button on the l
 
 If you wish to permanently delete the list, click the *Delete List* button.
 
-### [Quizzing Words](#quizzing-words)
+### Quizzing Words
 
 **Please refer to [Managing Lists]() to manage which words are included in your quiz program.**
 
@@ -87,9 +87,9 @@ Currently, only synonym questions are supported, but additional variety in quest
 
 ![Users can create custom study lists](./readme_assets/lexicon_quiz.gif)
 
-## [Code Highlights](#code-highlights)
+## Code Highlights
 
-### [Working with Word Data APIs](#working-with-data-apis)
+### Working with Word Data APIs
 
 Lexicon's data is provided courtesy of two external word data APIs. Word definitions and examples are provided by [Wordnik](http://http://developer.wordnik.com/docs.html) while thesaurus data (for quiz questions) is provided by [Datamuse](http://www.datamuse.com/api/). I am profoundly grateful for the free access tiers provided by these APIs.
 
@@ -155,11 +155,9 @@ Note that when data is available locally, the small list constraint becomes unne
 
 In the longer term, at scale, Lexicon would ideally store all word data locally (though such data is costly). Word examples and collocates could ideally be sourced from the [COCA corpus](https://corpus.byu.edu/coca/). Definitions would ideally be sourced from a learner's dictionary to better target the educational market with easy to understand definitions and to enable other new features such as profanity filtering.
 
-### [Using Animations to Improve UX](#using-animations-to-improve-ux)
+### Using Animations to Improve UX
 
 Lexicon uses animations to create a smoother user experience, especially for answering quizzes. While these animations are mostly confined to fade-ins and container resizing on initial launch, they do require solid understanding of asynchronicity and the React lifecycle.
-
-#### Fade-in loading:
 
 Fade-in animations are managed by a combination of CSS and the UI Reducer in Redux. Whenever an AJAX request is initiated that affects the user interface, Redux will first set the `ui` slice of state to `loading: true`. When the AJAX request promise is resolved, the UI slice of state is set to `loading: false`. For example, consider the following thunk action to fetch a word's definitions and examples:
 
@@ -190,21 +188,21 @@ More complex fade-in and animation logic can be calculated in a similar way. For
 
 By updating `isLastQuestionCorrect` (measures whether the answer was guessed on the first try), `lastGuessStatus` (measures whether the most recently clicked answer was correct), `answerLoaded` (measures whether the solution text has finished loading in), and `clickedGuesses` (measures which answers were clicked in a set-like array), the page can precisely manage different animations and fades (e.g. default color to red/green for a clicked answer), creating a more seamless user experience.
 
-## [Roadmap](#roadmap)
+## Roadmap
 
-### [Responsive Mobile Design](#responsive-mobile-design)
+### Responsive Mobile Design
 
 Lexicon is currently optimized for displays at least 1025px wide. A priority enhancement is to write media queries to allow responsive styling on mobile displays.  
 
 Estimated completion date: January 2018
 
-### [List Search & Subscription](#list-search-and-subscription)
+### List Search and Subscription
 
 In a future release, users will be able to share lists with each other and search for pre-made lists. For example, a student in a literature class could search for a list based on the title of a book they are reading and subscribe without needing to design his or her own list.  
 
 Lexicon's backend was designed with this future feature in mind. List subscription is currently managed in a `user_lists` joins table instead of storing the foreign key directly in the lists table; subscribing to a list will simply require adding a new entry to this joins table, as well as a `list_owner` foreign key for filtering owned lists vs. subscribed lists.
 
-### [Word Mastery](#word-mastery)
+### Word Mastery
 
 Currently, Lexicon does not track users' mastery of individual words. When a quiz question is correctly answered on a first attempt, only the user's points are incremented.
 
