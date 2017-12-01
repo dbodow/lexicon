@@ -7,8 +7,13 @@ export default class WordSearchResultsIndex extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.search.length === 1 && !nextProps.ui.loading) {
       this.props.setUILoading();
-      nextProps.history.push(`lookup/${nextProps.search[0]}`);
+      this.redirectToWord(`lookup/${nextProps.search[0]}`);
     }
+  }
+
+  redirectToWord(path) {
+    this.props.setUILoading();
+    this.props.history.push(path);
   }
 
   renderSuggestedMatches() {
@@ -17,14 +22,18 @@ export default class WordSearchResultsIndex extends React.Component {
       <div className="suggested-word-search-content">
         <div className="top-suggestion-container">
           <h1 className="word-show-error-header">Did you mean?</h1>
-          <h2><Link to={`lookup/${results[0]}`}>{results[0]}</Link></h2>
+          <h2><a onClick={this.redirectToWord.bind(this, `lookup/${results[0]}`)}>
+            {results[0]}
+          </a></h2>
         </div>
         <div className="more-suggestions-container">
           <h1 className="more-suggestions-header">More Suggestions:</h1>
           <ul>
             {results.slice(1).map( result => (
               <li key={result}>
-                <Link to={`lookup/${result}`}>{result}</Link>
+                <a onClick={this.redirectToWord.bind(this, `lookup/${result}`)}>
+                  {result}
+                </a>
               </li>
             ))}
           </ul>
@@ -62,7 +71,7 @@ export default class WordSearchResultsIndex extends React.Component {
                 history={this.props.history}/></li>
               <li><ActionLink to="lookup/defenestrate"
                 text="defenestrate"
-                action={this.props.setUILoading} 
+                action={this.props.setUILoading}
                 history={this.props.history}/></li>
               <li><ActionLink to="lookup/flocculent"
                 text="flocculent"
