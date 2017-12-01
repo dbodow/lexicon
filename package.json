@@ -14,9 +14,11 @@
     "react-spinners": "^0.2.5",
     "react-truncate": "^2.3.0",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "webpack": "^3.8.1"
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
@@ -43,5 +45,8 @@
   "engines": {
     "node": "6.10.1",
     "npm": "3.10.10"
-  }
+  },
+  "author": "David Bodow <dbodow@gmail.com>",
+  "license": "ISC"
+
 }
