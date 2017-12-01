@@ -9,9 +9,7 @@ export default class WordExamplesIndex extends React.Component {
   }
 
   render () {
-    console.log(this.props);
     const exampleIds = Object.keys(this.props.examples);
-    console.log(exampleIds);
     return (
       <ul className='word-examples-index'>
         {exampleIds.map(id => (
