@@ -16,7 +16,7 @@ The web app allows users to:
   * [Creating a Study Program](#creating-a-study-program)
   * [Quizzing Words](#quizzing-words)
 * [Code Highlights (technical)](#code-highlights)
-  * [Working with Word Data APIs](#working-with-data-apis)
+  * [Working with Word Data APIs](#working-with-word-data-apis)
   * [Using Animations to Improve UX](#using-animations-to-improve-ux)
 * [Roadmap](#roadmap)
   * [Responsive Mobile Design](#responsive-mobile-design)
@@ -50,7 +50,7 @@ to view its words, manage its activation status, or delete it.
 #### Creating Lists
 Click on the *Start a New List* button on your lists index page to open a list creation form. In this form, add a list of up to 20 words to study, and click *Create List* to generate the study list. When the list is created, you will automatically be redirected to the list's show page.
 
-Note that we must limit lists to a 20 word maximum to ensure a smooth user experience. For technical details on this limitation see [Working with Word Data APIs]()
+Note that we must limit lists to a 20 word maximum to ensure a smooth user experience. For technical details on this limitation see [Working with Word Data APIs](#working-with-word-data-apis)
 
 ![Users can create custom study lists](./readme_assets/lexicon_new_list.gif)
 
@@ -77,7 +77,7 @@ If you wish to permanently delete the list, click the *Delete List* button.
 
 ### Quizzing Words
 
-**Please refer to [Managing Lists]() to manage which words are included in your quiz program.**
+**Please refer to [Managing Lists](#managing-lists) to manage which words are included in your quiz program.**
 
 While logged in, users can quiz themselves on words from their active lists. Click on the *quiz* link on the navigation header to proceed to the quiz page.  
 
@@ -91,7 +91,7 @@ Currently, only synonym questions are supported, but additional variety in quest
 
 ### Working with Word Data APIs
 
-Lexicon's data is provided courtesy of two external word data APIs. Word definitions and examples are provided by [Wordnik](http://http://developer.wordnik.com/docs.html) while thesaurus data (for quiz questions) is provided by [Datamuse](http://www.datamuse.com/api/). I am profoundly grateful for the free access tiers provided by these APIs.
+Lexicon's data is provided courtesy of two external word data APIs. Word definitions and examples are provided by [Wordnik](http://developer.wordnik.com/docs.html) while thesaurus data (for quiz questions) is provided by [Datamuse](http://www.datamuse.com/api/). I am profoundly grateful for the free access tiers provided by these APIs.
 
 Integrating external data into Lexicon proved both rewarding and challenging. With access to these services' rich datasets, Lexicon can provide an engaging user experience directly from launch. However, because data is stored externally and must be fetched on user request, Lexicon needed to implement certain optimizations and constraints on users to ensure an acceptable user experience:
 
