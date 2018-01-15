@@ -5,6 +5,9 @@ class Api::QuizzesController < ApplicationController
   def create
     current_user.increment_points(100) if params[:correct] == "true"
     @solution = current_user.words.where('lists.active' => true).sample
+    p "initial word is: #{@solution}"
+    @solution ||= Word.create_word(Word.fetch_random_words(1).first)
+    p "final word is: #{@solution}"
     @correct_answer = Datamuse.new.fetch_top_synonym(@solution.word)['word']
     @wrong_answers = fetch_random_wrong_answers(@correct_answer)
     @user = current_user
