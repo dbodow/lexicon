@@ -4,8 +4,8 @@ class Example < ApplicationRecord
 
   belongs_to :word
 
-  def self.create_examples(wordnikExamples, word_id)
-    wordnikExamples.each do |result|
+  def self.create_examples(wordnik_examples, word_id)
+    wordnik_examples.each do |result|
       example = result['text']
       example_source = result['title']
       Example.create(example: example, example_source: example_source,

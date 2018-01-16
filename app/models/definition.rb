@@ -4,8 +4,8 @@ class Definition < ApplicationRecord
 
   belongs_to :word
 
-  def self.create_definitions(wordnikDefinitions, word_id)
-    wordnikDefinitions.each do |result|
+  def self.create_definitions(wordnik_definitions, word_id)
+    wordnik_definitions.each do |result|
       definition = result['text']
       attribution = result['attributionText']
       pos = result['partOfSpeech']

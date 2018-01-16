@@ -40,9 +40,15 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'capybara', '~> 2.13'
+  # Add and configure if using capybara tests
+  # https://www.devmynd.com/blog/setting-up-rspec-and-capybara-in-rails-5-for-testing/
+  # gem 'capybara', '~> 2.13'
+  # gem 'database_cleaner'
+  gem "factory_bot_rails", "~> 4.0"
   gem 'pry-rails'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
