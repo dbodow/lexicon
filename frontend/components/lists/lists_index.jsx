@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import ListIndexItem from './list_index_item';
 import { oneHundredYearsSample,
          SSATSample,
-         chemistrySample } from '../../util/prefilled_lists_util';
+         morphologyAndRootsSample,
+         nonFictionSample,
+         historicalDocumentsSample,
+         speechesSample,
+         justForFunSample,
+         newsSample } from '../../util/prefilled_lists_util';
 
 export default class ListsIndex extends React.Component {
   componentDidMount() {
@@ -48,43 +53,43 @@ export default class ListsIndex extends React.Component {
           <div className="list-ideas-item">
             <i className="fa fa-pagelines" aria-hidden="true"/>
             <Link onClick={(e) => (
-                this.newPreloadList(e, SSATSample)
+                this.newPreloadList(e, morphologyAndRootsSample)
               )} to='/lists/new'>Morphology & Roots</Link>
           </div>
           <div className="list-ideas-item">
             <i className="fa fa-book" aria-hidden="true" />
             <Link onClick={(e) => (
-                this.newPreloadList(e, SSATSample)
+                this.newPreloadList(e, oneHundredYearsSample)
               )} to='/lists/new'>Literature</Link>
           </div>
           <div className="list-ideas-item">
             <i className="fa fa-grav" aria-hidden="true" />
             <Link onClick={(e) => (
-                this.newPreloadList(e, SSATSample)
+                this.newPreloadList(e, nonFictionSample)
               )} to='/lists/new'>Non-Fiction</Link>
           </div>
           <div className="list-ideas-item">
             <i className="fa fa-globe" aria-hidden="true" />
             <Link onClick={(e) => (
-                this.newPreloadList(e, SSATSample)
+                this.newPreloadList(e, historicalDocumentsSample)
               )} to='/lists/new'>Historical Documents</Link>
           </div>
           <div className="list-ideas-item">
             <i className="fa fa-comment" aria-hidden="true" />
             <Link onClick={(e) => (
-                this.newPreloadList(e, SSATSample)
+                this.newPreloadList(e, speechesSample)
               )} to='/lists/new'>Speeches</Link>
           </div>
           <div className="list-ideas-item">
             <i className="fa fa-futbol-o" aria-hidden="true" />
             <Link onClick={(e) => (
-                this.newPreloadList(e, SSATSample)
+                this.newPreloadList(e, justForFunSample)
               )} to='/lists/new'>Just for fun</Link>
           </div>
           <div className="list-ideas-item">
             <i className="fa fa-newspaper-o" aria-hidden="true" />
             <Link onClick={(e) => (
-                this.newPreloadList(e, SSATSample)
+                this.newPreloadList(e, newsSample)
               )} to='/lists/new'>News</Link>
           </div>
         </div>
