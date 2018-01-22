@@ -1,28 +1,18 @@
 import React from 'react';
 import { PulseLoader } from 'react-spinners';
+import { oneHundredYearsSample,
+         SSATSample,
+         chemistrySample } from '../../util/prefilled_lists_util';
 
 export default class NewList extends React.Component {
-  constructor() {
-    super();
-    const _nullState = {
-      title: '',
-      description: '',
-      wordsList: ''
-    };
-    this.oneHundredYearsWordsSample = {
-      wordsList: 'nostalgia, lament, resignation, disdain, credulous, insomnia, indolent, enigma, patriarch, rancor'
-    };
-    this.SSATWordsSample = {
-      wordsList: 'abhor, benevolent, debase, effervescent, furtive, impetuous, opulent, spurious, superfluous, celestial'
-    };
-    this.chemistryWordsSample = {
-      wordsList: 'molarity, acid, titrate, entropy, enthalpy, absorbance, molecule, oxidation, catalyst, quark'
-    };
-    this.state = _nullState;
+  constructor(props) {
+    super(props);
+    this.state = this.props.ui.prefill.list;
   }
 
   componentWillMount() {
     this.props.clearEntities();
+    this.props.clearPrefill();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,10 +25,10 @@ export default class NewList extends React.Component {
   validateRequiredFields() {
     const errors = [];
     if (!this.state.title) errors.push("Title cannot be empty.");
-    if (this.wordsListToArray(this.state.wordsList).length === 0) {
+    if (this.wordsListToArray(this.state.words).length === 0) {
       errors.push("Please select some words for your list.");
     }
-    if (this.wordsListToArray(this.state.wordsList).length > 20) {
+    if (this.wordsListToArray(this.state.words).length > 20) {
       errors.push("Lexicon relies on a free API to locate data for our users' lists. Please limit yourself to only 20 words per list so that we can remain within our API call limit.");
     }
     if (errors.length !== 0) {
@@ -49,12 +39,12 @@ export default class NewList extends React.Component {
   }
 
   wordsListToArray() {
-    const words = this.state.wordsList.split(/[^A-Za-z'-]/).filter(Boolean);
+    const words = this.state.words.split(/[^A-Za-z'-]/).filter(Boolean);
     return Array.from(new Set(words));
   }
 
-  handlePopulate(stateSlice) {
-    return e => this.setState(stateSlice);
+  handlePopulate(sample) {
+    return e => this.setState(sample);
   }
 
   handleChange(stateSlice) {
@@ -73,7 +63,7 @@ export default class NewList extends React.Component {
     const submissionList = {
       title: this.state.title,
       description: this.state.description,
-      words: this.wordsListToArray(this.state.wordsList)
+      words: this.wordsListToArray(this.state.words)
     };
     this.props.createList(submissionList);
   }
@@ -93,15 +83,15 @@ export default class NewList extends React.Component {
           <div className='col-1-3'>
             <input type='text' placeholder='Give your list a title. e.g. "GRE Cram"'
                    onChange={this.handleChange('title')}
-                   id="title"/>
+                   id="title" value={this.state.title}/>
             <textarea placeholder="Give your list an optional description."
                       onChange={this.handleChange('description')}
-                      id="description" />
+                      id="description" value={this.state.description} />
           </div>
           <div className='col-2-3'>
             <textarea placeholder="Type in a list of words you want to learn."
-                      onChange={this.handleChange('wordsList')}
-                      id="wordsList" value={this.state.wordsList} />
+                      onChange={this.handleChange('words')}
+                      id="words" value={this.state.words} />
           </div>
         </div>
         <div className='new-list-create-button'
@@ -111,15 +101,15 @@ export default class NewList extends React.Component {
         </div>
         <h3>Only want to test? Try a sample word list:</h3>
         <div className='sample-list-button'
-             onClick={this.handlePopulate(this.oneHundredYearsWordsSample)}>
+             onClick={this.handlePopulate(oneHundredYearsSample)}>
           100 Years of Solitude
         </div>
         <div className='sample-list-button'
-             onClick={this.handlePopulate(this.SSATWordsSample)} >
+             onClick={this.handlePopulate(SSATSample)} >
           Common SSAT Words
         </div>
         <div className='sample-list-button'
-             onClick={this.handlePopulate(this.chemistryWordsSample)} >
+             onClick={this.handlePopulate(chemistrySample)} >
           Chemistry 101
         </div>
       </form>

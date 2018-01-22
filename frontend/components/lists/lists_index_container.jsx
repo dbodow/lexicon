@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchListsIndex } from '../../actions/list_actions';
 import { clearErrors } from '../../actions/error_actions';
-import { setUILoading } from '../../actions/ui_actions';
+import { setUILoading,
+         setPrefilledList } from '../../actions/ui_actions';
 
 const mapStateToProps = state => ({
   lists: state.entities.lists,
@@ -14,7 +15,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchListsIndex: () => dispatch(fetchListsIndex()),
   clearErrors: () => dispatch(clearErrors()),
-  setUILoading: () => dispatch(setUILoading())
+  setUILoading: () => dispatch(setUILoading()),
+  setPrefilledList: (params) => dispatch(setPrefilledList(params))
 });
 
 export default withRouter(connect(
