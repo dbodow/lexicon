@@ -12,7 +12,6 @@ export const clearUILoading = () => ({
 });
 
 export const setPrefilledList = ({title, description, words}) => {
-  console.log({title, description, words});
   return {
   type: PREFILL_LIST,
   prefill: {

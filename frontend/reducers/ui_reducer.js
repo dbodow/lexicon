@@ -19,10 +19,6 @@ const notPrefilledState = {
 const _nullState = merge(notLoadingState, notPrefilledState);
 
 export default (state=_nullState, action) => {
-  console.log(action);
-  console.log(merge(state, {
-    prefill: action.prefill
-  }));
   const newState = merge ({}, state);
   switch (action.type) {
     case SET_UI_LOADING:
