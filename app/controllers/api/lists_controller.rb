@@ -6,13 +6,13 @@ class Api::ListsController < ApplicationController
 
   def index
     @lists = current_user.lists.includes(:list_words)
-    render :index, status: 200
+    render :index
   end
 
   def show
     load_list(params[:id])
     if @list.empty?
-      render json: ["list not found"], status: 404
+      render :show_error, status: 404
     else
       render :show
     end
@@ -20,11 +20,11 @@ class Api::ListsController < ApplicationController
 
   def create
     @list = List.new(list_params)
-    if List.create_list(current_user, param_words[:words], @list)
+    if List.create_list(current_user, words_params[:words], @list)
       load_list(@list.id)
       render :show
     else
-      render json: ["list creation failed"], status: 422
+      render :create_error, status: 422
     end
   end
 
@@ -36,7 +36,7 @@ class Api::ListsController < ApplicationController
   def update
     load_list(params[:id])
     if @list.empty?
-      render json: ["list not found"], status: 404
+      render :show_error, status: 404
       return
     end
     toggle_active_status
@@ -45,7 +45,7 @@ class Api::ListsController < ApplicationController
 
   private
 
-  # grabs the list and also associated data for jbuilder; no n+1!
+  # grabs the list and preloads associated data for JBuilder; no n+1!
   def load_list(id)
     @list = List.includes(:words)
       .includes(:definitions)
@@ -57,7 +57,7 @@ class Api::ListsController < ApplicationController
     params.require(:list).permit(:title, :description, :active)
   end
 
-  def param_words
+  def words_params
     params.require(:list).permit(words: [])
   end
 

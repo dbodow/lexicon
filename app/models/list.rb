@@ -19,7 +19,7 @@ class List < ApplicationRecord
            through: :user_lists,
            source: :user
 
-  def self.create_list(user, arg_words, list=List.new)
+  def self.create_list(user, arg_words, list)
     ActiveRecord::Base.transaction do
       list.save!
       list.user_lists.create!(user_id: user.id)

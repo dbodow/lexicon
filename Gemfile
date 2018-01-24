@@ -44,6 +44,7 @@ group :development, :test do
   # https://www.devmynd.com/blog/setting-up-rspec-and-capybara-in-rails-5-for-testing/
   # gem 'capybara', '~> 2.13'
   # gem 'database_cleaner'
+  gem 'db-query-matchers'
   gem "factory_bot_rails", "~> 4.0"
   gem 'pry-rails'
   gem 'rspec-rails'
