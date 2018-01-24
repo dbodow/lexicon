@@ -1,0 +1,1 @@
+json.array!([params[:query]])

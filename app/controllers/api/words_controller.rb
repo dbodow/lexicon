@@ -1,41 +1,44 @@
 class Api::WordsController < ApplicationController
   def index
-    # sleep(0.5) # simulate network latency
-    sleep(0.2) # rate limit abusive use
-    begin
-      @query_results = Word.query_wordnik(params[:query])
-    rescue
-      @query_results = { 'type' => 'error', 'message' => 'Wordnik API failed - check server logs' }
-    end
+    limit_request_rate
+    get_query_results
+
+    # Handle errors
     if @query_results.key?('type') && @query_results['type'] == 'error'
-      render json: [params[:query]], status: 422
+      render :index_error, status: 422
       return
     end
+
+    # Handle no results
     unless @query_results['totalResults'] > 0
-      render json: [params[:query]], status: 404
+      render :index_error, status: 404
       return
     end
-    render json: parseQueryResults
+
+    render :index
   end
 
   def show
-    # sleep(0.5) # simulate network latency
-    sleep(0.2) # rate limit abusive use
+    limit_request_rate
     @word = Word.find_by_word(params[:word])
+
+    # Handle no results
     unless @word
-      render json: ["You searched for #{params[:word]}. Perhaps the word was misspelled?"], status: 404
+      render :show_error, status: 404
       return
     end
+
     render :show
   end
 
   private
 
-  def parseQueryResults
-    parsed_results = []
-    @query_results['searchResults'].each do |result|
-      parsed_results << result['word'] unless result['count'] == 0
-    end
-    parsed_results
+  def get_query_results
+    @query_results = Word.query_wordnik(params[:query])
+  rescue(StandardError)
+    @query_results = {
+      'type' => 'error',
+      'message' => 'Wordnik API failed - check server logs'
+    }
   end
 end

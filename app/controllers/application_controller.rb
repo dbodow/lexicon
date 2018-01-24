@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     current_user.reset_session_token!
     session[:session_token] = nil
   end
+
+  def limit_request_rate
+    sleep(0.2)
+  end
 end
