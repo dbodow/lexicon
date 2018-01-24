@@ -6,15 +6,11 @@ class Api::ListsController < ApplicationController
 
   def index
     @lists = current_user.lists.includes(:list_words)
-    render :index
+    render :index, status: 200
   end
 
   def show
-    @list = List.includes(:list_words)
-      .includes(:words)
-      .includes(:definitions)
-      .includes(:examples)
-      .where(id: params[:id])
+    load_list(params[:id])
     if @list.empty?
       render json: ["list not found"], status: 404
     else
@@ -25,8 +21,7 @@ class Api::ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     if List.create_list(current_user, param_words[:words], @list)
-      # grab associated data for jbuilder
-      @list = List.includes(:list_words).includes(:words).where(id: @list.id)
+      load_list(@list.id)
       render :show
     else
       render json: ["list creation failed"], status: 422
@@ -39,9 +34,7 @@ class Api::ListsController < ApplicationController
   end
 
   def update
-    # update is only used to toggle activation for inital release
-    @list = List.includes(:list_words).includes(:words).where(id: params[:id])
-    # byebug
+    load_list(params[:id])
     if @list.empty?
       render json: ["list not found"], status: 404
       return
@@ -51,6 +44,14 @@ class Api::ListsController < ApplicationController
   end
 
   private
+
+  # grabs the list and also associated data for jbuilder; no n+1!
+  def load_list(id)
+    @list = List.includes(:words)
+      .includes(:definitions)
+      .includes(:examples)
+      .where(id: id)
+  end
 
   def list_params
     params.require(:list).permit(:title, :description, :active)

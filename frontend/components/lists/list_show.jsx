@@ -1,10 +1,14 @@
 import React from 'react';
 import ListShowIndexItem from './list_show_index_item';
 import { Link } from 'react-router-dom';
+import isEmpty from 'lodash/isEmpty';
 
 export default class ListShow extends React.Component {
   componentDidMount(e) {
-    this.props.fetchListShow(this.props.match.params.id);
+    // List will already be loaded if it was just created
+    if (this.isInvalidState) {
+      this.props.fetchListShow(this.props.match.params.id);
+    }
   }
 
   handleToggleListActivation(e) {
@@ -115,5 +119,12 @@ export default class ListShow extends React.Component {
         {this.renderWords()}
       </div>
     );
+  }
+
+  isInvalidState() {
+    return isEmpty(this.props.lists) ||
+           isEmpty(this.props.words) ||
+           isEmpty(this.props.definitions) ||
+           isEmpty(this.props.examples);
   }
 }
