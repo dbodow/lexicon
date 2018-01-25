@@ -22,20 +22,21 @@ RSpec.describe Word do
 
   describe 'API calls' do
     let(:wn) { Word.class_variable_get(:@@wordnik) }
+    let(:dm) { Word.class_variable_get(:@@datamuse) }
     let(:query) { 'hello' }
     let(:api_res) do
       double('HTTParty::Response dbl', parsed_response: 'blah')
     end
 
     describe "::fetch_random_words" do
-      let(:num_query) { 5 }
       let(:hash_api_res) do
         double('HTTParty::Response dbl2',
                parsed_response: [{ 'word' => 'blah' }])
       end
 
       it 'delegates to Wordnik#fetch_random_words' do
-        allow(wn).to receive(:fetch_random_words).and_return(hash_api_res)
+        allow(wn).to receive(:fetch_random_words)
+          .with(query).and_return(hash_api_res)
 
         expect(Word.fetch_random_words(query)).to eq(['blah'])
       end
@@ -43,7 +44,8 @@ RSpec.describe Word do
 
     describe "::fetch_definitions" do
       it 'delegates to Wordnik#fetch_definitions' do
-        allow(wn).to receive(:fetch_definitions).and_return(api_res)
+        allow(wn).to receive(:fetch_definitions)
+          .with(query).and_return(api_res)
 
         expect(Word.fetch_definitions(query)).to eq('blah')
       end
@@ -51,7 +53,8 @@ RSpec.describe Word do
 
     describe "::fetch_examples" do
       it 'delegates to Wordnik#fetch_examples' do
-        allow(wn).to receive(:fetch_examples).and_return(api_res)
+        allow(wn).to receive(:fetch_examples)
+          .with(query).and_return(api_res)
 
         expect(Word.fetch_examples(query)).to eq('blah')
       end
@@ -59,9 +62,19 @@ RSpec.describe Word do
 
     describe "::query_wordnik" do
       it 'delegates to Wordnik#query_wordnik' do
-        allow(wn).to receive(:query_wordnik).and_return(api_res)
+        allow(wn).to receive(:query_wordnik)
+          .with(query).and_return(api_res)
 
         expect(Word.query_wordnik(query)).to eq('blah')
+      end
+    end
+
+    describe "::fetch_top_synonym" do
+      it 'delegates to Datamuse#fetch_top_synonym' do
+        allow(dm).to receive(:fetch_top_synonym)
+          .with(query).and_return(api_res)
+
+        expect(Word.fetch_top_synonym(query)).to eq(api_res)
       end
     end
   end

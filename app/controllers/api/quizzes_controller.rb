@@ -3,18 +3,30 @@ require 'datamuse'
 
 class Api::QuizzesController < ApplicationController
   def create
+    # Reward users who got the last question correct
     current_user.increment_points(100) if params[:correct] == "true"
-    @solution = current_user.words.where('lists.active' => true).sample
-    p "initial word is: #{@solution}"
-    @solution ||= Word.create_word(Word.fetch_random_words(1).first)
-    p "final word is: #{@solution}"
-    @correct_answer = Datamuse.new.fetch_top_synonym(@solution.word)['word']
+    @user = current_user # allows points to be updated in the response
+
+    # Load a solution word
+    @solution = random_active_list_word
+    ensure_solution_exists # in case there are no active lists
+
+    # create answer choices
+    @correct_answer = fetch_correct_answer
     @wrong_answers = fetch_random_wrong_answers(@correct_answer)
-    @user = current_user
+
     render :show
   end
 
   private
+
+  def random_active_list_word
+    current_user.words.where('lists.active' => true).sample
+  end
+
+  def fetch_correct_answer
+    Word.fetch_top_synonym(@solution.word)['word']
+  end
 
   def fetch_random_wrong_answers(correct_answer_str)
     wrong_answers = []
@@ -31,7 +43,8 @@ class Api::QuizzesController < ApplicationController
     wrong_answers
   end
 
-  def quiz_params
-    # reserved for word mastery tracking bonus feature
+  def ensure_solution_exists
+    # picks a random word for the quiz solution
+    @solution ||= Word.create_word(Word.fetch_random_words(1).first)
   end
 end

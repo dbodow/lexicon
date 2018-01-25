@@ -1,21 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe Api::ListsController do
-  let(:user) { create(:user) }
-  let(:list) { create(:list) }
-  let(:word) { create(:real_word) }
-  let(:word2) { create(:real_word, word: 'leitmotif') }
-  let(:user_list) do
+  let!(:user) { create(:user) }
+  let!(:list) { create(:list) }
+  let!(:word) { create(:real_word) }
+  # need 2 words for n+1 query tests
+  let!(:word2) { create(:real_word, word: 'leitmotif') }
+  let!(:user_list) do
     create(:user_list,
            user_id: user.id,
            list_id: list.id)
   end
-  let(:list_word) do
+  let!(:list_word) do
     create(:list_word,
            word_id: word.id,
            list_id: list.id)
   end
-  let(:list_word2) do
+  let!(:list_word2) do
     create(:list_word,
            word_id: word2.id,
            list_id: list.id)
