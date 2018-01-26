@@ -23,7 +23,8 @@
     "babel-preset-react": "^6.24.1",
     "jest": "^22.1.4",
     "react-test-renderer": "^16.2.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "regenerator-runtime": "^0.11.1"
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
@@ -32,7 +33,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
     "start": "webpack --watch",
     "postinstall": "webpack"
   },
