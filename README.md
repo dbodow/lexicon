@@ -1,5 +1,7 @@
 # Lexicon
 
+[![Build Status](https://travis-ci.org/dbodow/lexicon.svg?branch=master)](https://travis-ci.org/dbodow/lexicon) [![Coverage Status](https://coveralls.io/repos/github/dbodow/lexicon/badge.svg?branch=master)](https://coveralls.io/github/dbodow/lexicon?branch=master)
+
 [Lexicon](http://lexiconly.herokuapp.com/) is a vocabulary study web app deeply inspired by [Vocabulary.com](http://www.vocabulary.com). It is
 built on a Rails 5 backend with a PostgreSQL database, with a React/Redux
 frontend.  

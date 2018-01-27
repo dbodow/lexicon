@@ -32,6 +32,7 @@ gem 'jquery-rails'
 # gem 'capistrano-rails', group: :development
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'httparty'
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'annotate'
