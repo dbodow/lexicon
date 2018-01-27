@@ -11,8 +11,7 @@ export const clearUILoading = () => ({
   type: CLEAR_UI_LOADING
 });
 
-export const setPrefilledList = ({title, description, words}) => {
-  return {
+export const setPrefilledList = ({title, description, words}) => ({
   type: PREFILL_LIST,
   prefill: {
     list: {
@@ -21,7 +20,7 @@ export const setPrefilledList = ({title, description, words}) => {
       words
     }
   }
-};};
+});
 
 export const clearPrefill = () => ({
   type: CLEAR_PREFILL
