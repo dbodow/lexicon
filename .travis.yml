@@ -18,4 +18,4 @@ before_script:
 
 test:
   adapter: postgresql
-  database: travis_ci_test
+  database: lexicon_test
