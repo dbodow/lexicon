@@ -1,10 +1,10 @@
 import * as actions from '../session_actions';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import fetchMock from 'fetch-mock';
+// import fetchMock from 'fetch-mock';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+// const middlewares = [thunk];
+// const mockStore = configureMockStore(middlewares);
 
 const user = {
   id: 1,
@@ -36,26 +36,26 @@ describe('updateUserPoints', () => {
 });
 
 describe('async actions', () => {
-  afterEach(() => {
-    fetchMock.reset();
-    fetchMock.restore();
-  });
+  // afterEach(() => {
+  //   fetchMock.reset();
+  //   fetchMock.restore();
+  // });
 
   describe('signup', () => {
-    const successReq = fetchMock
+    // const successReq = fetchMock
       // .getOnce('')
 
     it('sends a request to the signup session api', () => {
 
     });
 
-    context('when the api request resolves successfully', () => {
+    describe('when the api request resolves successfully', () => {
       it('dispatches resulting data via receiveCurrentUser', () => {
 
       });
     });
 
-    context('when the api request fails', () => {
+    describe('when the api request fails', () => {
       it('dispatches resulting error via receiveSessionErrors', () => {
 
       });
