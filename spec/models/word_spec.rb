@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'byebug'
 
 RSpec.describe Word do
   subject(:real_word) { build(:real_word) }
@@ -91,8 +92,10 @@ RSpec.describe Word do
 
       context 'when a valid word exists' do
         before(:each) do
-          allow(Word).to receive(:fetch_definitions).and_return(['def'])
-          allow(Word).to receive(:fetch_examples).and_return({ 'examples' => ['ex'] })
+          allow(Word).to receive(:fetch_definitions)
+            .and_return(['def'])
+          allow(Word).to receive(:fetch_examples)
+            .and_return('examples' => ['ex'])
           allow(Word).to receive(:create).and_return(real_word)
           allow(Definition).to receive(:create_definitions)
           allow(Example).to receive(:create_examples)
@@ -105,12 +108,16 @@ RSpec.describe Word do
         end
 
         it 'delegates to Definition::create_definitions' do
-          expect(Definition).to receive(:create_definitions).with(['def'], 7)
+          expect(Definition).to receive(:create_definitions)
+            .with(['def'], 7)
+
           Word.create_word('lexicon')
         end
 
         it 'delegates to Example::create_examples' do
-          expect(Example).to receive(:create_examples).with(['ex'], 7)
+          expect(Example).to receive(:create_examples)
+            .with(['ex'], 7)
+
           Word.create_word('lexicon')
         end
 
@@ -122,17 +129,36 @@ RSpec.describe Word do
 
     describe '::find_by_word' do
       it 'checks whether the word exists in the database' do
-        allow(Word).to receive(:find_by).with(word: 'lexicon').and_return(real_word)
+        allow(Word).to receive(:find_by)
+          .with(word: 'lexicon')
+          .and_return(real_word)
 
         expect(Word).not_to receive(:create_word)
         expect(Word.find_by_word('lexicon')).to be(real_word)
       end
 
-      it 'delegates to Word::create_word if creating a new word' do
-        allow(Word).to receive(:find_by).with(word: 'lexicon').and_return(nil)
-        allow(Word).to receive(:create_word).with('lexicon').and_return(real_word)
+      context 'when creating a new word' do
+        it 'delegates to Word::create_word' do
+          allow(Word).to receive(:find_by)
+            .with(word: 'lexicon')
+            .and_return(nil)
 
-        expect(Word.find_by_word('lexicon')).to be(real_word)
+          allow(Word).to receive(:create_word)
+            .with('lexicon')
+            .and_return(real_word)
+
+          expect(Word.find_by_word('lexicon')).to be(real_word)
+        end
+      end
+
+      context 'when retrieving an existing word' do
+        let(:old_word) { create(:old_word) }
+
+        it 'updates the updated_at timestamp' do
+          retrieved_word = Word.find_by_word(old_word.word)
+
+          expect(retrieved_word.updated_at).to be_within(1.second).of Time.now
+        end
       end
     end
   end
@@ -154,6 +180,30 @@ RSpec.describe Word do
         allow(real_word).to receive(:definitions).and_return(dbl_defs)
 
         expect(real_word.definition_ids).to eq([4])
+      end
+    end
+  end
+
+  describe 'cron scripts' do
+    describe '#cleanup_unused_words' do
+      after(:all) { Word.all.destroy_all } # clean up persisted words
+
+      context 'when a word is more than a month old' do
+        it 'is deleted from the database' do
+          Word.create(word: 'blah', updated_at: Time.new(2000))
+          Word.cleanup_unused_words
+
+          expect(Word.all).to be_empty
+        end
+      end
+
+      context 'when a word is less than a month old' do
+        it 'remains in the database' do
+          Word.create(word: 'blah')
+          Word.cleanup_unused_words
+
+          expect(Word.all).not_to be_empty
+        end
       end
     end
   end

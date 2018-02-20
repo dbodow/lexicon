@@ -1,4 +1,5 @@
 require 'wordnik'
+require 'byebug'
 
 class Word < ApplicationRecord
   validates :word, presence: true, uniqueness: true
@@ -38,8 +39,17 @@ class Word < ApplicationRecord
     # Lookup in database cache to reduce API calls to Wordnik
     result = Word.find_by(word: word)
 
-    # Create missing words and cache them if they don't exist
-    result ||= Word.create_word(word)
+    # Create missing words and cache them if they don't exist;
+    # Update the timestamp of retrieved words to prevent them from
+    # being deleted by the cleanup cron job (which uncaches words after
+    # 1 month of not being used to adhere to the Wordnik license)
+    if result
+      result.updated_at = Time.now
+      result.save
+    else
+      result = Word.create_word(word)
+    end
+
     result
   end
 
@@ -64,6 +74,17 @@ class Word < ApplicationRecord
 
   def self.fetch_top_synonym(string)
     @@datamuse.fetch_top_synonym(string)
+  end
+
+  # Cleans the database of any words not accessed for 30 days
+  # (Wordnik allows data to be cached, but not permanently stored
+  # so running this periodically allows us to stay on good terms with
+  # the license
+  def self.cleanup_unused_words
+    # byebug
+    oldest_allowed_time = 30.days.ago
+
+    Word.where('updated_at < ?', oldest_allowed_time).destroy_all
   end
 
   def example_ids

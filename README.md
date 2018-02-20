@@ -196,8 +196,6 @@ By updating `isLastQuestionCorrect` (measures whether the answer was guessed on 
 
 Lexicon is currently optimized for displays at least 1025px wide. A priority enhancement is to write media queries to allow responsive styling on mobile displays.  
 
-Estimated completion date: January 2018
-
 ### List Search and Subscription
 
 In a future release, users will be able to share lists with each other and search for pre-made lists. For example, a student in a literature class could search for a list based on the title of a book they are reading and subscribe without needing to design his or her own list.  
