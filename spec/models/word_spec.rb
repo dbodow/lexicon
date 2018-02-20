@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'byebug'
 
 RSpec.describe Word do
   subject(:real_word) { build(:real_word) }

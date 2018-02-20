@@ -32,7 +32,6 @@ gem 'jquery-rails'
 gem 'font-awesome-sass', '~> 4.7.0'
 gem 'httparty'
 gem 'coveralls', require: false
-gem 'whenever', require: false
 
 group :development, :test do
   gem 'annotate'

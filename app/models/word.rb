@@ -1,5 +1,4 @@
 require 'wordnik'
-require 'byebug'
 
 class Word < ApplicationRecord
   validates :word, presence: true, uniqueness: true
@@ -81,7 +80,6 @@ class Word < ApplicationRecord
   # so running this periodically allows us to stay on good terms with
   # the license
   def self.cleanup_unused_words
-    # byebug
     oldest_allowed_time = 30.days.ago
 
     Word.where('updated_at < ?', oldest_allowed_time).destroy_all
