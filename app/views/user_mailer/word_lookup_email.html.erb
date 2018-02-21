@@ -1,0 +1,15 @@
+<p>Dear <%=@user.username%>,</p>
+
+<p>We've found the word you were looking for earlier:</p>
+
+<%=link_to @word.word, @lookup_url%>
+
+<p>
+  Sorry we couldn't find it for you earlier!
+  Our word data provider was down.
+</p>
+
+<p>Hope you find this helpful still!</p>
+
+<p>Warm regards,</p>
+<p>The Lexicon Team</p>

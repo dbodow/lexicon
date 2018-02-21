@@ -18,20 +18,19 @@ class WordRequestCache < ApplicationRecord
 
   def self.process_query(query)
     query_string = query.query
-    username = query.user.username
+    user = query.user
 
     word = Word.create_word(query_string)
 
-    WordRequestCache.send_email(word, username) if word
+    UserMailer.word_lookup_email(word, user) if word
 
     word # truthy if result found; falsy otherwise
   end
 
   def self.enqueue_query(query)
+    return unless current_user.validation_status
     user_id = current_user.id
     cached_query = WordRequestCache.new(query: query, user_id: user_id)
     cached_query.save # TODO: is this sufficient? consider save! + error handling
   end
-
-  def self.send_email(word, email); end
 end
