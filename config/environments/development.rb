@@ -1,3 +1,5 @@
+require 'credential'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -27,7 +29,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true # changed!
 
   config.action_mailer.perform_caching = false
 
@@ -54,4 +56,17 @@ Rails.application.configure do
 
   # added encrypted secrets to protect wordnik api key
   config.read_encrypted_secrets = true
+
+  # Added 02/20/18 to test deliveries
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              "smtp.gmail.com",
+    port:                 25,
+    user_name:            "lexiconly.heroku.app@gmail.com",
+    password:             Credential.gmail_password,
+    authentication:       "plain",
+    enable_starttls_auto: true
+  }
+
 end

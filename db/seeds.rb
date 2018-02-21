@@ -8,23 +8,23 @@
 
 # demo user
 
-User.create(username: 'eHemmingway', password: 'fivetoedcat')
+User.create(username: 'eHemmingway', password: 'fivetoedcat', email: 'lexicon@mailinator.com')
 
 # child-icon user
 
-User.create(username: 'rFrost', password: 'password')
+User.create(username: 'rFrost', password: 'password', email: 'lexicon@mailinator.com')
 
 # leaf-icon user
 
-User.create(username: 'jConrad', password: 'password', points: 900)
+User.create(username: 'jConrad', password: 'password', email: 'lexicon@mailinator.com', points: 900)
 
 # fire icon user
 
-User.create(username: 'gGMarquez', password: 'password', points: 1200)
+User.create(username: 'gGMarquez', password: 'password', email: 'lexicon@mailinator.com', points: 1200)
 
 # lightning bolt user
 
-User.create(username: 'ebWhite', password: 'password', points: 2000)
+User.create(username: 'ebWhite', password: 'password', email: 'lexicon@mailinator.com', points: 2000)
 
 List.create_list( User.find_by(username: 'eHemmingway'),
                   ['bumfuzzle', 'defenestrate', 'flocculent', 'frogman', 'logophile'],

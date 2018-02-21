@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   end
 
   root to: 'static_pages#root'
+
+  get 'verification/:validation_uri', to: 'static_pages#email_verification'
 end

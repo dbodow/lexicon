@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Lexicon, <%= @user.username %></h1>
+    <p>
+      Please verify your email address by clicking
+      <a href=<%= @confirm_url %>> here </a>.
+    </p>
+    <p>
+      We'll only use your email in the rare case that you look up a word
+      while the linguistics API we use goes down. If that happens, we'll
+      send you an email with your queried words when the API comes back
+      online!
+    </p>
+    <p>Thanks for joining!</p>
+  </body>
+</html>

@@ -42,6 +42,11 @@ class User < ApplicationRecord
     self.save
   end
 
+  def verify!
+    self.validation_status = true
+    self.save!
+  end
+
   private
 
   def ensure_default_values

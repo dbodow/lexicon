@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128184706) do
+ActiveRecord::Schema.define(version: 20180220234155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,7 +67,18 @@ ActiveRecord::Schema.define(version: 20171128184706) do
     t.integer "points", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", null: false
+    t.boolean "validation_status", default: false
+    t.string "validation_uri"
     t.index ["username"], name: "index_users_on_username", unique: true
+  end
+
+  create_table "word_request_caches", force: :cascade do |t|
+    t.string "query", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "query"], name: "index_word_request_caches_on_user_id_and_query", unique: true
   end
 
   create_table "words", force: :cascade do |t|
