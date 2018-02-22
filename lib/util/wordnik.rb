@@ -16,20 +16,14 @@ class Wordnik
   end
 
   def api_available?(timeout_duration = 3)
-    timeout = Time.now + timeout_duration.seconds
-
-    endpoint = "/word.json/test"
-    req_params = {
-      api_key: @api_key
-    }
-
-    req_string = create_req_string(endpoint, req_params)
-    response = Wordnik.get(req_string, timeout: timeout_duration).response
+    # Assumes the microservice is either all up or all down
+    # Could use a head request, but this is infrequent, so just reuse get code
+    response = fetch_definitions('test', timeout_duration).response
 
     response_succeeded?(response)
   end
 
-  def fetch_definitions(word)
+  def fetch_definitions(word, timeout_duration = 3)
     endpoint = "/word.json/#{word}/definitions?"
     req_params = {
       limit: 200,
@@ -40,10 +34,10 @@ class Wordnik
     }
 
     req_string = create_req_string(endpoint, req_params)
-    Wordnik.get(req_string)
+    Wordnik.get(req_string, timeout: timeout_duration)
   end
 
-  def fetch_examples(word)
+  def fetch_examples(word, timeout_duration = 3)
     endpoint = "/word.json/#{word}/examples?"
     req_params = {
       includeDuplicates: false,
@@ -54,25 +48,25 @@ class Wordnik
     }
 
     req_string = create_req_string(endpoint, req_params)
-    Wordnik.get(req_string)
+    Wordnik.get(req_string, timeout: timeout_duration)
   end
 
   def fetch_definitions_and_examples(word, timeout_duration = 3)
-    threads = []
     results = {}
-    timeout = Time.now + timeout_duration.seconds
 
-    threads << Thread.new { results[:definitions] = fetch_definitions(word) }
-    threads << Thread.new { results[:examples] = fetch_examples(word) }
+    threads = [
+      Thread.new do
+        results[:definitions] = fetch_definitions(word, timeout_duration)
+      end,
+      Thread.new do
+        results[:examples] = fetch_examples(word, timeout_duration)
+      end
+    ]
 
-    while Time.now < timeout
-      break if results[:examples] && results[:definitions]
-    end
+    threads.each(&:join)
 
-    # important: check for timeout first, as the others may not be defined
-    if timeout_elapsed?(timeout) ||
-      response_failed?(results[:definitions].response) ||
-      response_failed?(results[:examples].response)
+    if response_failed?(results[:definitions].response) ||
+       response_failed?(results[:examples].response)
       raise Exceptions::ExternalApiError.new("Wordnik API unavailable")
     end
 
@@ -126,10 +120,6 @@ class Wordnik
   end
 
   private
-
-  def timeout_elapsed?(timeout)
-    Time.now > timeout
-  end
 
   def response_succeeded?(response)
     response.code == "200"
