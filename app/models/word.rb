@@ -1,6 +1,9 @@
 require 'wordnik'
+require 'exceptions'
 
 class Word < ApplicationRecord
+  include Exceptions
+
   validates :word, presence: true, uniqueness: true
 
   has_many :examples,
@@ -20,18 +23,20 @@ class Word < ApplicationRecord
   @@datamuse ||= Datamuse.new
 
   def self.create_word(word)
-    # check that the word exists
-    definitions = Word.fetch_definitions(word)
-    return false if definitions.empty?
+    # lookup the word
+    word_data = Word.fetch_definitions_and_examples(word)
+    definitions, examples = word_data[:definitions], word_data[:examples]
 
     # build word, definitions, and examples
     new_word = Word.create(word: word)
     word_id = new_word.id
-    examples = Word.fetch_examples(word)['examples']
     Definition.create_definitions(definitions, word_id)
     Example.create_examples(examples, word_id)
 
     new_word
+  rescue Exceptions::ExternalApiError
+    # expected behavior is to return false in a failure
+    return false
   end
 
   def self.find_by_word(word)
@@ -65,6 +70,17 @@ class Word < ApplicationRecord
 
   def self.fetch_examples(word)
     @@wordnik.fetch_examples(word).parsed_response
+  end
+
+  def self.fetch_definitions_and_examples(word)
+    responses = @@wordnik.fetch_definitions_and_examples(word)
+    {
+      definitions: responses[:definitions].parsed_response,
+      examples: responses[:examples].parsed_response['examples']
+    }
+  rescue ExternalApiError
+    WordRequestCache.enqueue_query(word)
+    raise ExternalApiError("Wordnik API unavailable")
   end
 
   def self.query_wordnik(string)

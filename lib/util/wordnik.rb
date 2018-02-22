@@ -1,4 +1,5 @@
 require 'credential'
+require 'exceptions'
 
 # This class acts as a wrapper for the Wordnik API
 
@@ -7,10 +8,25 @@ require 'credential'
 # This class mainly uses the `word' and `words' endpoints
 class Wordnik
   include HTTParty
+  include Exceptions
   base_uri 'api.wordnik.com:80/v4/'
 
   def initialize
     @api_key = Credential.wordnik_api_key
+  end
+
+  def api_available?(timeout_duration = 3)
+    timeout = Time.now + timeout_duration.seconds
+
+    endpoint = "/word.json/test"
+    req_params = {
+      api_key: @api_key
+    }
+
+    req_string = create_req_string(endpoint, req_params)
+    response = Wordnik.get(req_string, timeout: timeout_duration).response
+
+    response_succeeded?(response)
   end
 
   def fetch_definitions(word)
@@ -39,6 +55,28 @@ class Wordnik
 
     req_string = create_req_string(endpoint, req_params)
     Wordnik.get(req_string)
+  end
+
+  def fetch_definitions_and_examples(word, timeout_duration = 3)
+    threads = []
+    results = {}
+    timeout = Time.now + timeout_duration.seconds
+
+    threads << Thread.new { results[:definitions] = fetch_definitions(word) }
+    threads << Thread.new { results[:examples] = fetch_examples(word) }
+
+    while Time.now < timeout
+      break if results[:examples] && results[:definitions]
+    end
+
+    # important: check for timeout first, as the others may not be defined
+    if timeout_elapsed?(timeout) ||
+      response_failed?(results[:definitions].response) ||
+      response_failed?(results[:examples].response)
+      raise Exceptions::ExternalApiError.new("Wordnik API unavailable")
+    end
+
+    results
   end
 
   def fetch_random_words(number)
@@ -85,5 +123,19 @@ class Wordnik
     req_string = endpoint.dup
     req_params.each { |k, v| req_string << "#{k}=#{v}&" }
     req_string[0...-1] # no trailing '&'
+  end
+
+  private
+
+  def timeout_elapsed?(timeout)
+    Time.now > timeout
+  end
+
+  def response_succeeded?(response)
+    response.code == "200"
+  end
+
+  def response_failed?(response)
+    response.code != "200"
   end
 end
