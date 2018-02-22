@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  validates :username, :password_digest, :session_token, :points, presence: true
+  validates :username, :password_digest, :session_token, :points,
+            :email, presence: true
   validates :username, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
@@ -9,11 +10,16 @@ class User < ApplicationRecord
   has_many :lists,
            through: :user_lists,
            source: :list
+
   has_many :words,
            through: :lists,
            source: :words
 
-  attr_reader :password
+  has_many :word_request_caches,
+           dependent: :destroy
+
+  attr_reader :password # TODO: test removal of this line
+
   after_initialize :ensure_default_values
 
   def self.find_by_credentials(username, password)

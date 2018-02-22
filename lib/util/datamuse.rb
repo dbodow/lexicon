@@ -7,11 +7,11 @@ class Datamuse
   base_uri 'api.datamuse.com'
 
   # `ml` = `meaning like`
-  def fetch_synonyms(word)
-    self.class.get("/words?ml=#{word}")
+  def self.fetch_synonyms(word)
+    Datamuse.get("/words?ml=#{word}")
   end
 
-  def fetch_top_synonym(word)
-    fetch_synonyms(word).first
+  def self.fetch_top_synonym(word)
+    Datamuse.fetch_synonyms(word).first
   end
 end

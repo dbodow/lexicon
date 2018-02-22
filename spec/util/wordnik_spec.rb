@@ -3,26 +3,29 @@ require 'rails_helper'
 # For API wrappers, test coverage checking parameters is limited
 # to non-default parameters
 RSpec.describe Wordnik do
-  subject(:wn) { Wordnik.new }
   let(:test_word) { 'hello' }
   let(:test_num) { 324 }
-  let(:api_key) { wn.instance_variable_get(:@api_key) }
+  let(:api_key) { Wordnik.class_variable_get(:@@api_key) }
 
   describe 'modules' do
     it 'includes HTTParty as a module' do
       expect(Wordnik.included_modules).to include(HTTParty)
     end
+
+    it 'includes Exceptions as a module' do
+      expect(Wordnik.included_modules).to include(Exceptions)
+    end
   end
 
   describe '#initialize' do
-    it 'initializes with an API key' do
+    it 'stores an API key' do
       expect(api_key).to_not be_nil
     end
   end
 
   describe '#fetch_definitions' do
     after(:each) do
-      wn.fetch_definitions(test_word)
+      Wordnik.fetch_definitions(test_word)
     end
 
     it 'sends a GET request to the right endpoint through HTTParty' do
@@ -46,7 +49,7 @@ RSpec.describe Wordnik do
 
   describe '#fetch_examples' do
     after(:each) do
-      wn.fetch_examples(test_word)
+      Wordnik.fetch_examples(test_word)
     end
 
     it 'sends a GET request to the right endpoint through HTTParty' do
@@ -76,7 +79,7 @@ RSpec.describe Wordnik do
 
   describe '#fetch_random_words' do
     after(:each) do
-      wn.fetch_random_words(test_num)
+      Wordnik.fetch_random_words(test_num)
     end
 
     it 'sends a GET request to the right endpoint through HTTParty' do
@@ -119,7 +122,7 @@ RSpec.describe Wordnik do
 
   describe '#query_wordnik' do
     after(:each) do
-      wn.query_wordnik(test_word)
+      Wordnik.query_wordnik(test_word)
     end
 
     it 'sends a GET request to the right endpoint through HTTParty' do

@@ -23,6 +23,7 @@ RSpec.describe List do
       User.new(
         username: "gStein",
         points: 2300,
+        email: 'lexicon@mailinator.com',
         password_digest: digest,
         session_token: 'O8fDG4NKQqiBu-ED8nkvkQ'
       )

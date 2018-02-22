@@ -1,4 +1,8 @@
+require 'exceptions'
+
 class Api::WordsController < ApplicationController
+  include Exceptions
+
   def index
     limit_request_rate
     get_query_results
@@ -29,6 +33,8 @@ class Api::WordsController < ApplicationController
     end
 
     render :show
+  rescue Exceptions::ExternalApiError
+    WordRequestCache.enqueue_query(query, user)
   end
 
   private

@@ -3,10 +3,6 @@ require 'rails_helper'
 RSpec.describe Word do
   subject(:real_word) { build(:real_word) }
 
-  it 'uses a single instance of Wordnik for requests' do
-    expect(Word.class_variable_get(:@@wordnik)).to be_a(Wordnik)
-  end
-
   context "when validating a new word" do
     it { should validate_presence_of(:word) }
 
@@ -21,8 +17,6 @@ RSpec.describe Word do
   end
 
   describe 'API calls' do
-    let(:wn) { Word.class_variable_get(:@@wordnik) }
-    let(:dm) { Word.class_variable_get(:@@datamuse) }
     let(:query) { 'hello' }
     let(:api_res) do
       double('HTTParty::Response dbl', parsed_response: 'blah')
@@ -35,7 +29,7 @@ RSpec.describe Word do
       end
 
       it 'delegates to Wordnik#fetch_random_words' do
-        allow(wn).to receive(:fetch_random_words)
+        allow(Wordnik).to receive(:fetch_random_words)
           .with(query).and_return(hash_api_res)
 
         expect(Word.fetch_random_words(query)).to eq(['blah'])
@@ -44,7 +38,7 @@ RSpec.describe Word do
 
     describe "::fetch_definitions" do
       it 'delegates to Wordnik#fetch_definitions' do
-        allow(wn).to receive(:fetch_definitions)
+        allow(Wordnik).to receive(:fetch_definitions)
           .with(query).and_return(api_res)
 
         expect(Word.fetch_definitions(query)).to eq('blah')
@@ -53,7 +47,7 @@ RSpec.describe Word do
 
     describe "::fetch_examples" do
       it 'delegates to Wordnik#fetch_examples' do
-        allow(wn).to receive(:fetch_examples)
+        allow(Wordnik).to receive(:fetch_examples)
           .with(query).and_return(api_res)
 
         expect(Word.fetch_examples(query)).to eq('blah')
@@ -62,7 +56,7 @@ RSpec.describe Word do
 
     describe "::query_wordnik" do
       it 'delegates to Wordnik#query_wordnik' do
-        allow(wn).to receive(:query_wordnik)
+        allow(Wordnik).to receive(:query_wordnik)
           .with(query).and_return(api_res)
 
         expect(Word.query_wordnik(query)).to eq('blah')
@@ -71,7 +65,7 @@ RSpec.describe Word do
 
     describe "::fetch_top_synonym" do
       it 'delegates to Datamuse#fetch_top_synonym' do
-        allow(dm).to receive(:fetch_top_synonym)
+        allow(Datamuse).to receive(:fetch_top_synonym)
           .with(query).and_return(api_res)
 
         expect(Word.fetch_top_synonym(query)).to eq(api_res)
@@ -83,7 +77,11 @@ RSpec.describe Word do
     describe '::create_word' do
       context 'when no such word exists' do
         it 'validates that a word has definitions' do
-          allow(Word).to receive(:fetch_definitions).and_return([])
+          allow(Word).to receive(:fetch_definitions_and_examples)
+            .and_return({
+                definitions: [],
+                examples: []
+              })
 
           expect(Word.create_word('apwymzfjf')).to be false
         end
@@ -91,10 +89,11 @@ RSpec.describe Word do
 
       context 'when a valid word exists' do
         before(:each) do
-          allow(Word).to receive(:fetch_definitions)
-            .and_return(['def'])
-          allow(Word).to receive(:fetch_examples)
-            .and_return('examples' => ['ex'])
+          allow(Word).to receive(:fetch_definitions_and_examples)
+            .and_return({
+              definitions: ['def'],
+              examples: ['ex']
+              })
           allow(Word).to receive(:create).and_return(real_word)
           allow(Definition).to receive(:create_definitions)
           allow(Example).to receive(:create_examples)
@@ -103,6 +102,7 @@ RSpec.describe Word do
 
         it 'creates a new word' do
           expect(Word).to receive(:create).with(word: 'lexicon')
+
           Word.create_word('lexicon')
         end
 

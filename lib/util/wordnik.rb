@@ -11,47 +11,45 @@ class Wordnik
   include Exceptions
   base_uri 'api.wordnik.com:80/v4/'
 
-  def initialize
-    @api_key = Credential.wordnik_api_key
-  end
+  @@api_key = Credential.wordnik_api_key
 
-  def api_available?(timeout_duration = 3)
+  def self.api_available?(timeout_duration = 3)
     # Assumes the microservice is either all up or all down
     # Could use a head request, but this is infrequent, so just reuse get code
     response = fetch_definitions('test', timeout_duration).response
 
-    response_succeeded?(response)
+    self.response_succeeded?(response)
   end
 
-  def fetch_definitions(word, timeout_duration = 3)
+  def self.fetch_definitions(word, timeout_duration = 3)
     endpoint = "/word.json/#{word}/definitions?"
     req_params = {
       limit: 200,
       includeRelated: true,
       useCanonical: false,
       includeTags: false,
-      api_key: @api_key
+      api_key: @@api_key
     }
 
     req_string = create_req_string(endpoint, req_params)
     Wordnik.get(req_string, timeout: timeout_duration)
   end
 
-  def fetch_examples(word, timeout_duration = 3)
+  def self.fetch_examples(word, timeout_duration = 3)
     endpoint = "/word.json/#{word}/examples?"
     req_params = {
       includeDuplicates: false,
       useCanonical: false,
       skip: 0,
       limit: 5,
-      api_key: @api_key
+      api_key: @@api_key
     }
 
     req_string = create_req_string(endpoint, req_params)
     Wordnik.get(req_string, timeout: timeout_duration)
   end
 
-  def fetch_definitions_and_examples(word, timeout_duration = 3)
+  def self.fetch_definitions_and_examples(word, timeout_duration = 3)
     results = {}
 
     threads = [
@@ -65,15 +63,15 @@ class Wordnik
 
     threads.each(&:join)
 
-    if response_failed?(results[:definitions].response) ||
-       response_failed?(results[:examples].response)
+    if self.response_failed?(results[:definitions].response) ||
+       self.response_failed?(results[:examples].response)
       raise Exceptions::ExternalApiError.new("Wordnik API unavailable")
     end
 
     results
   end
 
-  def fetch_random_words(number)
+  def self.fetch_random_words(number)
     endpoint = "/words.json/randomWords?"
     req_params = {
       hasDictionaryDef: true,
@@ -85,14 +83,14 @@ class Wordnik
       minLength: 5,
       maxLength: -1,
       limit: number,
-      api_key: @api_key
+      api_key: @@api_key
     }
 
     req_string = create_req_string(endpoint, req_params)
     Wordnik.get(req_string)
   end
 
-  def query_wordnik(string)
+  def self.query_wordnik(string)
     endpoint = "/words.json/search/#{string}?"
     req_params = {
       caseSensitive: false,
@@ -105,7 +103,7 @@ class Wordnik
       maxLength: -1,
       skip: 0,
       limit: 10,
-      api_key: @api_key
+      api_key: @@api_key
     }
 
     req_string = create_req_string(endpoint, req_params)
@@ -113,19 +111,17 @@ class Wordnik
   end
 
   # Consider splitting into a module if more APIs are added...
-  def create_req_string(endpoint, req_params)
+  def self.create_req_string(endpoint, req_params)
     req_string = endpoint.dup
     req_params.each { |k, v| req_string << "#{k}=#{v}&" }
     req_string[0...-1] # no trailing '&'
   end
 
-  private
-
-  def response_succeeded?(response)
+  def self.response_succeeded?(response)
     response.code == "200"
   end
 
-  def response_failed?(response)
+  def self.response_failed?(response)
     response.code != "200"
   end
 end

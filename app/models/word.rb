@@ -17,15 +17,15 @@ class Word < ApplicationRecord
            through: :list_words,
            source: :list
 
-  # Share a single Wordnik / Datamuse instance to reduce memory usage
-  # (Slightly more performative as class variable than Singleton)
-  @@wordnik ||= Wordnik.new
-  @@datamuse ||= Datamuse.new
-
   def self.create_word(word)
     # lookup the word
     word_data = Word.fetch_definitions_and_examples(word)
     definitions, examples = word_data[:definitions], word_data[:examples]
+
+    # allow word creation only if definitions exist
+    # lack of usage examples is acceptable, but in practice,
+    # words are more likely to lack a definition than an example
+    return false if definitions.empty?
 
     # build word, definitions, and examples
     new_word = Word.create(word: word)
@@ -34,9 +34,9 @@ class Word < ApplicationRecord
     Example.create_examples(examples, word_id)
 
     new_word
-  rescue Exceptions::ExternalApiError
-    # expected behavior is to return false in a failure
-    return false
+  # rescue Exceptions::ExternalApiError
+  #   # expected behavior is to return false in a failure
+  #   return false
   end
 
   def self.find_by_word(word)
@@ -59,36 +59,36 @@ class Word < ApplicationRecord
 
   # returns array of *strings*, not Word objects
   def self.fetch_random_words(number)
-    @@wordnik.fetch_random_words(number).parsed_response.map do |res|
+    Wordnik.fetch_random_words(number).parsed_response.map do |res|
       res['word']
     end
   end
 
   def self.fetch_definitions(word)
-    @@wordnik.fetch_definitions(word).parsed_response
+    Wordnik.fetch_definitions(word).parsed_response
   end
 
   def self.fetch_examples(word)
-    @@wordnik.fetch_examples(word).parsed_response
+    Wordnik.fetch_examples(word).parsed_response
   end
 
   def self.fetch_definitions_and_examples(word)
-    responses = @@wordnik.fetch_definitions_and_examples(word)
+    responses = Wordnik.fetch_definitions_and_examples(word)
     {
       definitions: responses[:definitions].parsed_response,
       examples: responses[:examples].parsed_response['examples']
     }
-  rescue ExternalApiError
-    WordRequestCache.enqueue_query(word)
-    raise ExternalApiError("Wordnik API unavailable")
+  # rescue ExternalApiError
+  #   WordRequestCache.enqueue_query(word)
+  #   raise ExternalApiError("Wordnik API unavailable")
   end
 
   def self.query_wordnik(string)
-    @@wordnik.query_wordnik(string).parsed_response
+    Wordnik.query_wordnik(string).parsed_response
   end
 
   def self.fetch_top_synonym(string)
-    @@datamuse.fetch_top_synonym(string)
+    Datamuse.fetch_top_synonym(string)
   end
 
   # Cleans the database of any words not accessed for 30 days
