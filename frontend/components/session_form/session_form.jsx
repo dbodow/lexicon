@@ -6,10 +6,14 @@ class SessionForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
+
+    const _initialState = {
       username: "",
       password: ""
     };
+    if (props.formType === "signup") _initialState.email = "";
+    this.state = _initialState;
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.loginDemoUser = this.loginDemoUser.bind(this);
   }
@@ -56,6 +60,17 @@ class SessionForm extends React.Component {
     );
   }
 
+  displayEmailField() {
+    if (this.props.formType === "signup") {
+      return (
+        <input type='text'
+               onChange={this.handleChange('email')}
+               className='session-form-input'
+               placeholder="Enter email address" />
+      );
+    }
+  }
+
   loginDemoUser(e) {
     e.preventDefault();
     this.props.login({
@@ -79,6 +94,7 @@ class SessionForm extends React.Component {
                    onChange={this.handleChange('username')}
                    className='session-form-input'
                    placeholder="Enter username" />
+           {this.displayEmailField()}
             <input type='password'
                    onChange={this.handleChange('password')}
                    className='session-form-input'

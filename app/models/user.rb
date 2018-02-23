@@ -21,6 +21,7 @@ class User < ApplicationRecord
   attr_reader :password # TODO: test removal of this line
 
   after_initialize :ensure_default_values
+  after_create :send_verification_email
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
@@ -58,5 +59,9 @@ class User < ApplicationRecord
   def ensure_default_values
     self.session_token ||= SecureRandom.urlsafe_base64
     self.points ||= 0
+  end
+
+  def send_verification_email
+    UserMailer.verification_email(self).deliver_now
   end
 end
