@@ -16,6 +16,5 @@ class UserMailer < ApplicationMailer
 
     mail(to:      @user.email,
          subject: "We found your word: #{@word.word}")
-      .deliver!
   end
 end

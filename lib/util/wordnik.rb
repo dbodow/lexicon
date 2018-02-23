@@ -19,6 +19,8 @@ class Wordnik
     response = fetch_definitions('test', timeout_duration).response
 
     self.response_succeeded?(response)
+  rescue SocketError
+    false
   end
 
   def self.fetch_definitions(word, timeout_duration = 3)
@@ -65,10 +67,12 @@ class Wordnik
 
     if self.response_failed?(results[:definitions].response) ||
        self.response_failed?(results[:examples].response)
-      raise Exceptions::ExternalApiError.new("Wordnik API unavailable")
+      raise Exceptions::ExternalApiError.new("Wordnik API response error")
     end
 
     results
+  rescue SocketError
+    raise StandardError.new("Cannot access Wordnik; internet access likely down")
   end
 
   def self.fetch_random_words(number)

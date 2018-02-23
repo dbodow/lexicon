@@ -6,31 +6,30 @@ class WordRequestCache < ApplicationRecord
   def self.process_queued_queries
     return 'Wordnik is down' unless Wordnik.api_available?
 
-    successful_lookups = []
+    lookups = []
 
-    WordRequestCache.includes(:users).all.each do |query|
-      lookup_was_success = WordRequestCache.process_query(query)
-      successful_lookups << query if lookup_was_success
+    WordRequestCache.includes(:user).all.each do |query|
+      WordRequestCache.process_query(query)
+      lookups << query
     end
 
-    successful_lookups.each(&:destroy)
+    lookups.each(&:destroy)
   end
 
   def self.process_query(query)
     query_string = query.query
     user = query.user
 
-    word = Word.create_word(query_string)
+    word = Word.find_by_word(query_string)
 
-    UserMailer.word_lookup_email(word, user) if word
+    UserMailer.word_lookup_email(word, user).deliver_now if word
 
-    word # truthy if result found; falsy otherwise
+    word # truthy if result found; false otherwise
   end
 
   def self.enqueue_query(query, user)
     return unless user.validation_status
-    user_id = user.id
-    cached_query = WordRequestCache.new(query: query, user_id: user_id)
+    cached_query = WordRequestCache.new(query: query, user_id: user.id)
     cached_query.save # TODO: is this sufficient? consider save! + error handling
   end
 end

@@ -44,7 +44,9 @@ export default class WordSearchResultsIndex extends React.Component {
 
   renderNoMatch() {
     return (
-      <WordShowErrors word={this.props.errors[0]} />
+      <WordShowErrors
+        word={this.props.errors[1]}
+        errors={this.props.errors} />
     );
   }
 

@@ -17,7 +17,7 @@ class Word < ApplicationRecord
            through: :list_words,
            source: :list
 
-  def self.create_word(word)
+  def self.create_word(word, requesting_user = nil)
     # lookup the word
     word_data = Word.fetch_definitions_and_examples(word)
     definitions, examples = word_data[:definitions], word_data[:examples]
@@ -34,12 +34,13 @@ class Word < ApplicationRecord
     Example.create_examples(examples, word_id)
 
     new_word
-  # rescue Exceptions::ExternalApiError
-  #   # expected behavior is to return false in a failure
-  #   return false
+  # rescue # Exceptions::ExternalApiError
+  #
+  #   WordRequestCache.enqueue_query(query, requesting_user) if requesting_user
+  #   raise Exceptions::ExternalApiError #TODO propagate message
   end
 
-  def self.find_by_word(word)
+  def self.find_by_word(word, requesting_user = nil)
     # Lookup in database cache to reduce API calls to Wordnik
     result = Word.find_by(word: word)
 
@@ -51,7 +52,7 @@ class Word < ApplicationRecord
       result.updated_at = Time.now
       result.save
     else
-      result = Word.create_word(word)
+      result = Word.create_word(word, requesting_user)
     end
 
     result

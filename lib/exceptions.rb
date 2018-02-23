@@ -1,3 +1,3 @@
 module Exceptions
-  class ExternalApiError < RuntimeError; end
+  class ExternalApiError < StandardError; end
 end

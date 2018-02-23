@@ -65,7 +65,8 @@ export default class WordShow extends React.Component {
             />
         </div>
         <WordShowErrors word={this.props.match.params.word}
-                        loading={this.props.ui.loading}/>
+                        loading={this.props.ui.loading}
+                        errors={this.props.errors.entities}/>
       </div>
     );
   }
