@@ -30,6 +30,6 @@ class WordRequestCache < ApplicationRecord
   def self.enqueue_query(query, user)
     return unless user.validation_status
     cached_query = WordRequestCache.new(query: query, user_id: user.id)
-    cached_query.save # TODO: is this sufficient? consider save! + error handling
+    cached_query.save
   end
 end

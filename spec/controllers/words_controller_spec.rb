@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'exceptions'
 
 RSpec.describe Api::WordsController do
   describe 'get #index' do
@@ -34,17 +35,26 @@ RSpec.describe Api::WordsController do
       index_req
     end
 
-    context 'when the Wordnik query fails for any reason' do
+    context 'when the Wordnik query fails to reach their server' do
       before(:each) do
-        allow(Word).to receive(:query_wordnik).and_raise(StandardError)
+        allow(Word).to receive(:query_wordnik)
+          .and_raise(Exceptions::ExternalApiError)
+
+        allow(WordRequestCache).to receive(:enqueue_query)
       end
 
-      it 'renders the index_error JBuilder view' do
-        expect(index_req).to render_template(:index_error)
+      it 'renders the wordnik_down_error JBuilder view' do
+        expect(index_req).to render_template(:wordnik_down_error)
       end
 
-      it 'responds with a 422 error' do
-        expect(index_req).to have_http_status(422)
+      it 'enqueues the query int he WordRequestCache for later processing' do
+        expect(WordRequestCache).to receive(:enqueue_query)
+
+        index_req
+      end
+
+      it 'responds with a 503 error' do
+        expect(index_req).to have_http_status(503)
       end
     end
 
@@ -55,8 +65,8 @@ RSpec.describe Api::WordsController do
           .and_return(no_query_results)
       end
 
-      it 'renders the index_error JBuilder view' do
-        expect(index_req).to render_template(:index_error)
+      it 'renders the no_search_result_error JBuilder view' do
+        expect(index_req).to render_template(:no_search_result_error)
       end
 
       it 'responds with a 404 error' do
@@ -100,14 +110,37 @@ RSpec.describe Api::WordsController do
       show_req
     end
 
-    context 'when the word lookup fails' do
+    context 'when the Wordnik API is down' do
+      before(:each) do
+        allow(Word).to receive(:find_by_word)
+          .and_raise(Exceptions::ExternalApiError)
+
+        allow(WordRequestCache).to receive(:enqueue_query)
+      end
+
+      it 'renders the wordnik_down_error JBuilder view' do
+        expect(show_req).to render_template(:wordnik_down_error)
+      end
+
+      it 'responds with a 503 error' do
+        expect(show_req).to have_http_status(503)
+      end
+
+      it 'enqueues the query int he WordRequestCache for later processing' do
+        expect(WordRequestCache).to receive(:enqueue_query)
+
+        show_req
+      end
+    end
+
+    context 'when the word lookup yields no results' do
       before(:each) do
         allow(Word).to receive(:find_by_word)
           .and_return(nil)
       end
 
-      it 'render the show_error JBuilder view' do
-        expect(show_req).to render_template(:show_error)
+      it 'render the no_show_result_error JBuilder view' do
+        expect(show_req).to render_template(:no_show_result_error)
       end
 
       it 'responds with a 404 error' do

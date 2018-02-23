@@ -72,7 +72,9 @@ class Wordnik
 
     results
   rescue SocketError
-    raise StandardError.new("Cannot access Wordnik; internet access likely down")
+    raise Exceptions::ExternalApiError.new(
+      "Cannot access Wordnik; internet access likely down"
+    )
   end
 
   def self.fetch_random_words(number)
@@ -112,6 +114,10 @@ class Wordnik
 
     req_string = create_req_string(endpoint, req_params)
     Wordnik.get(req_string)
+  rescue SocketError
+    raise Exceptions::ExternalApiError.new(
+      "Cannot access Wordnik; internet access likely down"
+    )
   end
 
   # Consider splitting into a module if more APIs are added...

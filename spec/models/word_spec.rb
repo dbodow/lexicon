@@ -101,7 +101,7 @@ RSpec.describe Word do
         end
 
         it 'creates a new word' do
-          expect(Word).to receive(:create).with(word: 'lexicon')
+          expect(Word).to receive(:create)
 
           Word.create_word('lexicon')
         end

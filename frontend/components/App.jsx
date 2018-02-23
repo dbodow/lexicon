@@ -21,8 +21,8 @@ const App = () => (
       <Route exact path="/" component={Splash} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
-      <Route path="/lookup/:word" component={WordShowContainer}/>
-      <Route exact path="/lookup" component={WordSearchContainer}/>
+      <ProtectedRoute path="/lookup/:word" component={WordShowContainer}/>
+      <ProtectedExactRoute exact path="/lookup" component={WordSearchContainer}/>
       <ProtectedExactRoute exact path="/lists"
                            component={ListsIndexContainer} />
       <ProtectedRoute path="/lists/new" component={NewListContainer}/>

@@ -6,6 +6,14 @@ class Api::WordsController < ApplicationController
 
   def index
     limit_request_rate
+    cached_query_result = Word.find_by(word: params[:query])
+
+    # Handle already looked up words
+    if cached_query_result
+      render json: [cached_query_result.word]
+      return
+    end
+
     get_query_results
 
     # Handle no results
@@ -15,14 +23,14 @@ class Api::WordsController < ApplicationController
     end
 
     render :index
-  rescue StandardError
+  rescue Exceptions::ExternalApiError
     WordRequestCache.enqueue_query(params[:query], current_user)
     render :wordnik_down_error, status: 503
   end
 
   def show
     limit_request_rate
-    @word = Word.find_by_word(params[:word], current_user)
+    @word = Word.find_by_word(params[:word])
 
     # Handle no results
     unless @word
@@ -31,8 +39,7 @@ class Api::WordsController < ApplicationController
     end
 
     render :show
-  # rescue Exceptions::ExternalApiError
-  rescue
+  rescue Exceptions::ExternalApiError
     WordRequestCache.enqueue_query(params[:word], current_user)
     render :wordnik_down_error, status: 503
   end
